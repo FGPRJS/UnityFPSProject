@@ -24,8 +24,8 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ChangeCamera",
-                    "type": "Button",
+                    "name": "Zoom",
+                    "type": "PassThrough",
                     "id": "80e1f958-67f6-446e-800b-f5cd406a3543",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -143,11 +143,11 @@
                 {
                     "name": "",
                     "id": "7829e271-0e52-4a1f-af05-1f562ed4d208",
-                    "path": "<Keyboard>/slash",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "ChangeCamera",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -158,7 +158,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChangeCamera",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

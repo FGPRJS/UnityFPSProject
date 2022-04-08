@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ public class PlayerMecha : MonoBehaviour
     private CharacterController charactercontroller;
 
 
-    public GameObject mechaHead;
+    private GameObject mechaHead;
 
     public float sensibility = 2.0f;
 
@@ -21,11 +22,23 @@ public class PlayerMecha : MonoBehaviour
     private float jumpHeight = 3.0f;
     private float gravity = 9.81f;
 
+    private CinemachineVirtualCamera[] cinemachines;
+    private enum CameraMode
+    {
+        DefaultCinemachine,
+        ZoomCinemachine
+    }
+    private CameraMode cameraMode;
+
     // Awake is called before Script Instance Load
     private void Awake()
     {
         this.playerInput = GetComponent<PlayerInput>();
         this.charactercontroller = GetComponent<CharacterController>();
+        this.mechaHead = transform.Find("Mecha_Turret").gameObject;
+        this.cinemachines = GetComponentsInChildren<CinemachineVirtualCamera>();
+
+        cameraMode = CameraMode.DefaultCinemachine;
     }
     // Start is called before the first frame update
     void Start()
@@ -33,6 +46,34 @@ public class PlayerMecha : MonoBehaviour
         moveAction = playerInput.actions["Move"];
         playerInput.actions["Jump"].performed += JumpChar;
         lookAction = playerInput.actions["Look"];
+        playerInput.actions["Zoom"].performed += ChangeMode;
+    }
+
+    private void ChangeMode(InputAction.CallbackContext obj)
+    {
+        var isPressed = obj.ReadValueAsButton();
+        if (isPressed)
+        {
+            cameraMode = CameraMode.ZoomCinemachine;
+        }
+        else
+        {
+            cameraMode = CameraMode.DefaultCinemachine;
+        }
+
+        Debug.Log("Current : " + cameraMode.ToString());
+
+        foreach (var machine in this.cinemachines)
+        {
+            if(cameraMode.ToString() == machine.Name)
+            {
+                machine.Priority = 99;
+            }
+            else
+            {
+                machine.Priority = 1;
+            }
+        }
     }
 
     private void JumpChar(InputAction.CallbackContext obj)
