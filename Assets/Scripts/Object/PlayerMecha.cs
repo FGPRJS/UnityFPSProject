@@ -13,6 +13,8 @@ public class PlayerMecha : MonoBehaviour
     private CharacterController charactercontroller;
 
 
+    
+
     private GameObject mechaHead;
 
     public float sensibility = 2.0f;
@@ -20,9 +22,19 @@ public class PlayerMecha : MonoBehaviour
     private Vector3 playerVelocity;
     private float charSpeed = 2.0f;
     private float jumpHeight = 3.0f;
-    private float gravity = 9.81f;
 
     private CinemachineVirtualCamera[] cinemachines;
+
+
+
+    private GameObject bullet;
+    private AudioClip fireSoundClip;
+    private AudioSource audioSource;
+
+    private bool Skill1Command = false;
+    private float Skill1Cooltime = 0.25f;
+    private float Skill1CurrentCooltime = 0.0f;
+
     private enum CameraMode
     {
         DefaultCinemachine,
@@ -33,6 +45,10 @@ public class PlayerMecha : MonoBehaviour
     // Awake is called before Script Instance Load
     private void Awake()
     {
+        this.bullet = Resources.Load<GameObject>("Prefabs/Volatiles/NormalBullet");
+        this.fireSoundClip = Resources.Load<AudioClip>("Music/SoundFX/FireArm/FireArm01");
+        this.audioSource = GetComponent<AudioSource>();
+        this.audioSource.clip = this.fireSoundClip;
         this.playerInput = GetComponent<PlayerInput>();
         this.charactercontroller = GetComponent<CharacterController>();
         this.mechaHead = transform.Find("Mecha_Turret").gameObject;
@@ -43,10 +59,25 @@ public class PlayerMecha : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         moveAction = playerInput.actions["Move"];
         playerInput.actions["Jump"].performed += JumpChar;
         lookAction = playerInput.actions["Look"];
         playerInput.actions["Zoom"].performed += ChangeMode;
+        playerInput.actions["Fire"].performed += Fire;
+    }
+
+    private void Fire(InputAction.CallbackContext obj)
+    {
+        var isPressed = obj.ReadValueAsButton();
+        if (isPressed)
+        {
+            Skill1Command = true;
+        }
+        else
+        {
+            Skill1Command = false;
+        }
     }
 
     private void ChangeMode(InputAction.CallbackContext obj)
@@ -71,7 +102,7 @@ public class PlayerMecha : MonoBehaviour
             }
             else
             {
-                machine.Priority = 1;
+                machine.Priority = 9;
             }
         }
     }
@@ -84,10 +115,31 @@ public class PlayerMecha : MonoBehaviour
         }
     }
 
+    private void Skill1()
+    {
+        var item = Instantiate(this.bullet, this.mechaHead.transform.position, this.mechaHead.transform.rotation * Quaternion.Euler(90,0,0));
+        item.GetComponent<Rigidbody>().AddForce(this.mechaHead.transform.forward.normalized * 1000.0f,ForceMode.Impulse);
+
+        this.audioSource.Play();
+    }
 
     // Update is called once per frame
     void Update()
     {
+        #region Skill Action
+
+        if (Skill1Command && Skill1CurrentCooltime == 0)
+        {
+            Skill1();
+            Skill1CurrentCooltime = Skill1Cooltime;
+        }
+
+        Skill1CurrentCooltime -= Time.deltaTime;
+        if (Skill1CurrentCooltime < 0) Skill1CurrentCooltime = 0;
+
+        #endregion
+
+
         #region Head Movement
 
         var readedLookAction = lookAction.ReadValue<Vector2>();
@@ -114,7 +166,7 @@ public class PlayerMecha : MonoBehaviour
         var moveDirection = new Vector3(readedMoveAction.x, 0, readedMoveAction.y);
         moveDirection = Camera.main.transform.TransformDirection(moveDirection);
 
-        playerVelocity.y -= gravity * Time.deltaTime;
+        playerVelocity.y -= GlobalConfigs.Instance.Gravity * Time.deltaTime;
 
         var result = ((moveDirection.normalized * charSpeed) + playerVelocity) * Time.deltaTime;
 
