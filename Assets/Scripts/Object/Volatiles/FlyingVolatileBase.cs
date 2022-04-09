@@ -4,33 +4,50 @@ using UnityEngine;
 
 public class FlyingVolatileBase : MonoBehaviour
 {
-    private AudioClip impactSoundClip;
-    private AudioSource audioSource;
-    private Rigidbody rigidbody;
-
-    protected void Awake()
+    void Awake()
     {
-        this.impactSoundClip = Resources.Load<AudioClip>("Music/SoundFX/Impact/IMPACT_Bullet_Metal_01_mono");
-        this.audioSource = GetComponent<AudioSource>();
-        this.audioSource.clip = this.impactSoundClip;
-        this.rigidbody = GetComponent<Rigidbody>();
+        this.AfterAwakeFunction();
     }
 
-    protected void Start()
+    protected virtual void AfterAwakeFunction()
+    {
+
+    }
+
+    void Start()
+    {
+        this.AfterStartFunction();
+    }
+
+    protected virtual void AfterStartFunction()
+    {
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        BeforeOnTriggerEnterFunction();
+        
+        Destroy(this.gameObject);
+    }
+
+    protected virtual void BeforeOnTriggerEnterFunction()
     {
         
     }
 
-    protected void OnCollisionEnter(Collision collision)
+    protected virtual void AfterOnTriggerEnterFunction()
     {
-        this.audioSource.Play();
 
-        //Temp
-        Object.Destroy(this);
     }
 
-    protected void Update()
+    void Update()
     {
-        this.transform.position += (this.transform.forward - new Vector3(0, GlobalConfigs.Instance.Gravity, 0)) * Time.deltaTime;
+        this.AfterUpdateFunction();
+    }
+
+    protected virtual void AfterUpdateFunction()
+    {
+
     }
 }

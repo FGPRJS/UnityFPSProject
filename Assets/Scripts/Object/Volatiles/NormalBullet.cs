@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class NormalBullet : FlyingVolatileBase
 {
-    protected void Start()
+    private GameObject afterBulletCollision;
+    private float timeLimit = 10.0f;
+
+    protected override void AfterAwakeFunction()
     {
-        base.Start();
+        afterBulletCollision = Resources.Load<GameObject>("Prefabs/Volatiles/AfterBulletCollision");
     }
 
-    protected void OnCollisionEnter(Collision Collision)
+    protected override void BeforeOnTriggerEnterFunction()
     {
-        base.OnCollisionEnter(Collision);
+        var instance = Instantiate(this.afterBulletCollision, this.transform.position, Quaternion.identity);
     }
 
-    protected void Awake()
+    protected override void AfterUpdateFunction()
     {
-        base.Awake();
-    }
-
-    protected void Update()
-    {
-        base.Update();
+        timeLimit -= Time.deltaTime;
+        if(timeLimit <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

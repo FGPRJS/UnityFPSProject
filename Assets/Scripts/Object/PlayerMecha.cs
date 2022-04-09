@@ -31,6 +31,8 @@ public class PlayerMecha : MonoBehaviour
     private AudioClip fireSoundClip;
     private AudioSource audioSource;
 
+    private GameObject skill1Object;
+
     private bool Skill1Command = false;
     private float Skill1Cooltime = 0.25f;
     private float Skill1CurrentCooltime = 0.0f;
@@ -46,15 +48,18 @@ public class PlayerMecha : MonoBehaviour
     private void Awake()
     {
         this.bullet = Resources.Load<GameObject>("Prefabs/Volatiles/NormalBullet");
-        this.fireSoundClip = Resources.Load<AudioClip>("Music/SoundFX/FireArm/FireArm01");
+        this.fireSoundClip = Resources.Load<AudioClip>("Sound/SoundFX/FireArm/FireArm01");
         this.audioSource = GetComponent<AudioSource>();
         this.audioSource.clip = this.fireSoundClip;
         this.playerInput = GetComponent<PlayerInput>();
         this.charactercontroller = GetComponent<CharacterController>();
-        this.mechaHead = transform.Find("Mecha_Turret").gameObject;
+        this.mechaHead = transform.Find("MechaTurret").gameObject;
         this.cinemachines = GetComponentsInChildren<CinemachineVirtualCamera>();
 
         cameraMode = CameraMode.DefaultCinemachine;
+
+        var item = this.mechaHead.transform.Find("Skill1");
+        this.skill1Object = item.gameObject;
     }
     // Start is called before the first frame update
     void Start()
@@ -117,10 +122,15 @@ public class PlayerMecha : MonoBehaviour
 
     private void Skill1()
     {
-        var item = Instantiate(this.bullet, this.mechaHead.transform.position, this.mechaHead.transform.rotation * Quaternion.Euler(90,0,0));
-        item.GetComponent<Rigidbody>().AddForce(this.mechaHead.transform.forward.normalized * 1000.0f,ForceMode.Impulse);
-
-        this.audioSource.Play();
+        foreach (Transform skill1Muzzle in this.skill1Object.transform)
+        {
+            var currentMuzzlePosition = skill1Muzzle.transform.position;
+            Debug.Log("MechaHead Position : " + this.mechaHead.transform.position);
+            Debug.Log("Muzzle Position : " + currentMuzzlePosition);
+            var shot = Instantiate(this.bullet, currentMuzzlePosition, this.mechaHead.transform.rotation * Quaternion.Euler(90, 0, 0));
+            shot.GetComponent<Rigidbody>().AddForce(this.mechaHead.transform.forward * 1000.0f, ForceMode.Impulse);
+            this.audioSource.Play();
+        }
     }
 
     // Update is called once per frame
@@ -156,7 +166,7 @@ public class PlayerMecha : MonoBehaviour
         }
 
         mechaHead.transform.rotation = Quaternion.Euler(newEulers);
-        
+
         #endregion
 
         #region Body Movement
@@ -165,10 +175,9 @@ public class PlayerMecha : MonoBehaviour
 
         var moveDirection = new Vector3(readedMoveAction.x, 0, readedMoveAction.y);
         moveDirection = Camera.main.transform.TransformDirection(moveDirection);
+        playerVelocity += Physics.gravity * (Time.deltaTime);
 
-        playerVelocity.y -= GlobalConfigs.Instance.Gravity * Time.deltaTime;
-
-        var result = ((moveDirection.normalized * charSpeed) + playerVelocity) * Time.deltaTime;
+        var result = ((moveDirection * charSpeed) + playerVelocity) * Time.deltaTime;
 
         charactercontroller.Move(result);
         #endregion
