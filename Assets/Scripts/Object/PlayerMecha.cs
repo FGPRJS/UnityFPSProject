@@ -5,15 +5,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMecha : MonoBehaviour
+public class PlayerMecha : MechaBase
 {
     private PlayerInput playerInput;
     private InputAction lookAction;
     private InputAction moveAction;
     private CharacterController charactercontroller;
-
-
-    
 
     private GameObject mechaHead;
 
@@ -125,10 +122,12 @@ public class PlayerMecha : MonoBehaviour
         foreach (Transform skill1Muzzle in this.skill1Object.transform)
         {
             var currentMuzzlePosition = skill1Muzzle.transform.position;
-            Debug.Log("MechaHead Position : " + this.mechaHead.transform.position);
-            Debug.Log("Muzzle Position : " + currentMuzzlePosition);
             var shot = Instantiate(this.bullet, currentMuzzlePosition, this.mechaHead.transform.rotation * Quaternion.Euler(90, 0, 0));
-            shot.GetComponent<Rigidbody>().AddForce(this.mechaHead.transform.forward * 1000.0f, ForceMode.Impulse);
+            var bulletBase = shot.GetComponent<BulletBase>();
+            bulletBase.Data = new BulletData();
+            bulletBase.Data.Damage = 100;
+            
+            shot.GetComponent<Rigidbody>().AddForce(this.mechaHead.transform.forward * 20.0f, ForceMode.Impulse);
             this.audioSource.Play();
         }
     }
