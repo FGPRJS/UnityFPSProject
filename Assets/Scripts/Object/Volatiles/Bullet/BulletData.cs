@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AfterBulletCollision : AfterVolatileCollision
+public class BulletData
 {
-
+    public long Damage;
 }

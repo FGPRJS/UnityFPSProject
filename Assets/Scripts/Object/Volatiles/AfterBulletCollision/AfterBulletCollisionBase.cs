@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AfterVolatileCollision : MonoBehaviour
+public class AfterBulletCollisionBase : MonoBehaviour
 {
     private AudioClip impactSoundClip;
     private AudioSource audioSource;

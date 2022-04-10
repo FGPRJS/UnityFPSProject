@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalBullet : FlyingVolatileBase
+public class NormalBullet : BulletBase
 {
     private GameObject afterBulletCollision;
     private float timeLimit = 10.0f;
@@ -12,8 +12,15 @@ public class NormalBullet : FlyingVolatileBase
         afterBulletCollision = Resources.Load<GameObject>("Prefabs/Volatiles/AfterBulletCollision");
     }
 
-    protected override void BeforeOnTriggerEnterFunction()
+    protected override void BeforeOnTriggerEnterFunction(Collider other)
     {
+        var damaging = other.gameObject.GetComponentInParent<IDamagable>();
+        if(damaging != null)
+        {
+            damaging.Damage(100);
+        }
+        
+
         var instance = Instantiate(this.afterBulletCollision, this.transform.position, Quaternion.identity);
     }
 
