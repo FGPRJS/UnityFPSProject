@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class MechaBase : MonoBehaviour, IDamagable
 {
-    protected MechaData data;
+    public MechaData data;
     protected GameObject mechaHead;
+
+    //Temp
+    public bool Skill1Command = false;
+    protected float Skill1Cooltime = 0.25f;
+    protected float Skill1CurrentCooltime = 0.0f;
+    public Vector3 playerVelocity = new Vector3(0,0,0);
+    public Vector2 lookValue;
 
     public void Damage(long damage)
     {
