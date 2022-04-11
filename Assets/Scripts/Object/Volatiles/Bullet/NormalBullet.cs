@@ -7,27 +7,25 @@ public class NormalBullet : BulletBase
     private GameObject afterBulletCollision;
     private float timeLimit = 10.0f;
 
-    protected override void Awake()
+    protected override void AfterAwakeFunction()
     {
-        base.Awake();
         afterBulletCollision = Resources.Load<GameObject>("Prefabs/Volatiles/AfterBulletCollision");
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    protected override void BeforeOnTriggerEnterFunction(Collider other)
     {
         var damaging = other.gameObject.GetComponentInParent<IDamagable>();
         if(damaging != null)
         {
             damaging.Damage(100);
         }
-        var instance = Instantiate(this.afterBulletCollision, this.transform.position, Quaternion.identity);
+        
 
-        base.OnTriggerEnter(other);
+        var instance = Instantiate(this.afterBulletCollision, this.transform.position, Quaternion.identity);
     }
 
-    protected override void Update()
+    protected override void AfterUpdateFunction()
     {
-        base.Update();
         timeLimit -= Time.deltaTime;
         if(timeLimit <= 0)
         {

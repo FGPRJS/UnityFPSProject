@@ -12,20 +12,23 @@ public class PlayerMecha : MechaBase
     private InputAction moveAction;
     private CharacterController charactercontroller;
 
-    
+    private GameObject mechaHead;
 
     public float sensibility = 2.0f;
 
     private Vector3 playerVelocity;
-
+    private float charSpeed = 2.0f;
+    private float jumpHeight = 3.0f;
 
     private CinemachineVirtualCamera[] cinemachines;
+
+
 
     private GameObject bullet;
     private AudioClip fireSoundClip;
     private AudioSource audioSource;
 
-    private GameObject muzzle;
+    private GameObject skill1Object;
 
     private bool Skill1Command = false;
     private float Skill1Cooltime = 0.25f;
@@ -39,36 +42,29 @@ public class PlayerMecha : MechaBase
     private CameraMode cameraMode;
 
     // Awake is called before Script Instance Load
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-
-        this.data.CharSpeed = 5.0f;
-        this.data.JumpHeight = 10.0f;
-
         this.bullet = Resources.Load<GameObject>("Prefabs/Volatiles/NormalBullet");
         this.fireSoundClip = Resources.Load<AudioClip>("Sound/SoundFX/FireArm/FireArm01");
         this.audioSource = GetComponent<AudioSource>();
         this.audioSource.clip = this.fireSoundClip;
         this.playerInput = GetComponent<PlayerInput>();
         this.charactercontroller = GetComponent<CharacterController>();
-
-        this.mechaHead = transform.Find("Head").gameObject;
-        this.muzzle = this.mechaHead.transform.Find("Muzzle").gameObject;
-
+        this.mechaHead = transform.Find("MechaTurret").gameObject;
         this.cinemachines = GetComponentsInChildren<CinemachineVirtualCamera>();
 
         cameraMode = CameraMode.DefaultCinemachine;
 
-        //var item = this.mechaHead.transform.Find("Skill1");
-        //this.skill1Object = item.gameObject;
+        var item = this.mechaHead.transform.Find("Skill1");
+        this.skill1Object = item.gameObject;
     }
     // Start is called before the first frame update
-    protected override void Start()
+    void Start()
     {
-        lookAction = playerInput.actions["Look"];
+        
         moveAction = playerInput.actions["Move"];
         playerInput.actions["Jump"].performed += JumpChar;
+        lookAction = playerInput.actions["Look"];
         playerInput.actions["Zoom"].performed += ChangeMode;
         playerInput.actions["Fire"].performed += Fire;
     }
@@ -117,27 +113,27 @@ public class PlayerMecha : MechaBase
     {
         if (this.charactercontroller.isGrounded)
         {
-            playerVelocity.y = this.data.JumpHeight;
+            playerVelocity.y = jumpHeight;
         }
     }
 
     private void Skill1()
     {
-        foreach (Transform skill1Muzzle in muzzle.transform)
+        foreach (Transform skill1Muzzle in this.skill1Object.transform)
         {
             var currentMuzzlePosition = skill1Muzzle.transform.position;
             var shot = Instantiate(this.bullet, currentMuzzlePosition, this.mechaHead.transform.rotation * Quaternion.Euler(90, 0, 0));
             var bulletBase = shot.GetComponent<BulletBase>();
             bulletBase.Data = new BulletData();
             bulletBase.Data.Damage = 100;
-
+            
             shot.GetComponent<Rigidbody>().AddForce(this.mechaHead.transform.forward * 20.0f, ForceMode.Impulse);
             this.audioSource.Play();
         }
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
         #region Skill Action
 
@@ -152,11 +148,14 @@ public class PlayerMecha : MechaBase
 
         #endregion
 
-        #region Head Rotate
-        var lookValue = lookAction.ReadValue<Vector2>();
-        var newEulers = mechaHead.transform.rotation.eulerAngles + new Vector3(-lookValue.y, lookValue.x, 0);
 
-        if (newEulers.x > 80 && newEulers.x < 180)
+        #region Head Movement
+
+        var readedLookAction = lookAction.ReadValue<Vector2>();
+
+        var newEulers = mechaHead.transform.rotation.eulerAngles + new Vector3(-readedLookAction.y, readedLookAction.x, 0);
+        
+        if(newEulers.x > 80 && newEulers.x < 180)
         {
             newEulers.x = 80;
         }
@@ -166,6 +165,7 @@ public class PlayerMecha : MechaBase
         }
 
         mechaHead.transform.rotation = Quaternion.Euler(newEulers);
+
         #endregion
 
         #region Body Movement
@@ -176,7 +176,7 @@ public class PlayerMecha : MechaBase
         moveDirection = Camera.main.transform.TransformDirection(moveDirection);
         playerVelocity += Physics.gravity * (Time.deltaTime);
 
-        var result = ((moveDirection * this.data.CharSpeed) + playerVelocity) * Time.deltaTime;
+        var result = ((moveDirection * charSpeed) + playerVelocity) * Time.deltaTime;
 
         charactercontroller.Move(result);
         #endregion
