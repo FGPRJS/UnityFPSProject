@@ -5,7 +5,7 @@ using UnityEngine;
 public class MechaBase : MonoBehaviour, IDamagable
 {
     public MechaData data;
-    protected GameObject mechaHead;
+    public GameObject mechaHead;
 
     //Temp
     public bool Skill1Command = false;
@@ -22,8 +22,10 @@ public class MechaBase : MonoBehaviour, IDamagable
 
     protected virtual void Awake()
     {
-        this.data = new MechaData();
-        this.data.HP = 1000;
+        data = new MechaData();
+        data.HP = 1000;
+
+        mechaHead = transform.Find("Head").gameObject;
     }
 
     // Start is called before the first frame update

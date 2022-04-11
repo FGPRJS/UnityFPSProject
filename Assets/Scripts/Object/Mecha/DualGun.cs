@@ -27,7 +27,6 @@ public class DualGun : MechaBase
         this.audioSource = GetComponent<AudioSource>();
         this.audioSource.clip = this.fireSoundClip;
 
-        this.mechaHead = transform.Find("Head").gameObject;
         this.muzzle = this.mechaHead.transform.Find("Muzzle").gameObject;
     }
     // Start is called before the first frame update
