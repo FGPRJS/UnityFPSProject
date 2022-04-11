@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MechaBase : MonoBehaviour, IDamagable
 {
-    private MechaData data;
+    protected MechaData data;
+    protected GameObject mechaHead;
 
     public void Damage(long damage)
     {
@@ -12,20 +13,20 @@ public class MechaBase : MonoBehaviour, IDamagable
         Debug.Log(data.HP);
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         this.data = new MechaData();
         this.data.HP = 1000;
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         
     }
