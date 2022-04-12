@@ -11,7 +11,6 @@ public class DualGun : MechaBase
     private AudioSource audioSource;
 
     private GameObject muzzle;
-
     
 
     // Awake is called before Script Instance Load
@@ -62,19 +61,25 @@ public class DualGun : MechaBase
 
         #endregion
 
+        #region Camera Rotate
+        var cameraEulers = cameraTarget.transform.rotation.eulerAngles + new Vector3(-lookValue.y, lookValue.x, 0);
+
+        if (cameraEulers.x > 80 && cameraEulers.x < 180)
+        {
+            cameraEulers.x = 80;
+        }
+        else if (cameraEulers.x > 180 && cameraEulers.x < 280)
+        {
+            cameraEulers.x = 280;
+        }
+
+        cameraTarget.transform.rotation = Quaternion.Euler(cameraEulers);
+        #endregion
+
         #region Head Rotate
-        var newEulers = mechaHead.transform.rotation.eulerAngles + new Vector3(-lookValue.y, lookValue.x, 0);
+        var headEulers = cameraTarget.transform.rotation.eulerAngles;
 
-        if (newEulers.x > 80 && newEulers.x < 180)
-        {
-            newEulers.x = 80;
-        }
-        else if (newEulers.x > 180 && newEulers.x < 280)
-        {
-            newEulers.x = 280;
-        }
-
-        mechaHead.transform.rotation = Quaternion.Euler(newEulers);
+        mechaHead.transform.rotation = Quaternion.Euler(headEulers);
         #endregion
     }
 }

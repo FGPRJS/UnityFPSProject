@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         cinemachines = GetComponentsInChildren<CinemachineVirtualCamera>();
         foreach(var cinemachine in cinemachines)
         {
-            cinemachine.Follow = main.mechaHead.transform;
+            cinemachine.Follow = main.cameraTarget.transform;
         }
         charactercontroller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();

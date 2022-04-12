@@ -6,6 +6,7 @@ public class MechaBase : MonoBehaviour, IDamagable
 {
     public MechaData data;
     public GameObject mechaHead;
+    public GameObject cameraTarget;
 
     //Temp
     public bool Skill1Command = false;
@@ -26,6 +27,7 @@ public class MechaBase : MonoBehaviour, IDamagable
         data.HP = 1000;
 
         mechaHead = transform.Find("Head").gameObject;
+        cameraTarget = transform.Find("CameraTarget").gameObject;
     }
 
     // Start is called before the first frame update
