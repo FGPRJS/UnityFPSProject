@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class TrainingBot : MechaBase
 {
-    // Start is called before the first frame update
-    protected override void Start()
+    protected override void Awake()
     {
         base.Awake();
 
-        this.data.CharSpeed = 5.0f;
-        this.data.JumpHeight = 10.0f;
+        #region GameData
+        data = new MechaData();
+        data.MaxHP = 1000;
+        data.HP = 1000;
+        data.CharSpeed = 5.0f;
+        data.JumpHeight = 10.0f;
+        #endregion
     }
+
 
     // Update is called once per frame
     protected override void Update()

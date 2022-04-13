@@ -21,7 +21,8 @@ public class MechaOutlet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        made = Instantiate(Producing, this.transform.position, Quaternion.identity);
+        made.SetTargetLoc(new Vector3(0, 0, 0));
     }
 
     // Update is called once per frame
@@ -36,7 +37,6 @@ public class MechaOutlet : MonoBehaviour
         }
         else
         {
-            
         }
     }
     private void OnTriggerStay(Collider other)

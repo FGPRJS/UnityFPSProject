@@ -10,7 +10,7 @@ public class NormalBullet : BulletBase
     protected override void Awake()
     {
         base.Awake();
-        afterBulletCollision = Resources.Load<GameObject>("Prefabs/Volatiles/AfterBulletCollision");
+        afterBulletCollision = Resources.Load<GameObject>("Prefabs/AfterEffects/AfterBulletCollision");
     }
 
     protected override void OnTriggerEnter(Collider other)

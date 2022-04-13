@@ -18,8 +18,15 @@ public class DualGun : MechaBase
     {
         base.Awake();
 
-        this.data.CharSpeed = 5.0f;
-        this.data.JumpHeight = 10.0f;
+        #region GameData
+        data = new MechaData();
+        data.MaxHP = 1000;
+        data.HP = 1000;
+        data.CharSpeed = 5.0f;
+        data.JumpHeight = 10.0f;
+        #endregion
+
+
 
         this.bullet = Resources.Load<GameObject>("Prefabs/Volatiles/NormalBullet");
         this.fireSoundClip = Resources.Load<AudioClip>("Sound/SoundFX/FireArm/FireArm01");

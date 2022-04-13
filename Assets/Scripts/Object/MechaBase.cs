@@ -8,6 +8,8 @@ public class MechaBase : MonoBehaviour, IDamagable
     public GameObject mechaHead;
     public GameObject cameraTarget;
 
+    private GameObject destroyEffect;
+
     //Temp
     public bool Skill1Command = false;
     protected float Skill1Cooltime = 0.25f;
@@ -23,9 +25,7 @@ public class MechaBase : MonoBehaviour, IDamagable
 
     protected virtual void Awake()
     {
-        data = new MechaData();
-        data.HP = 1000;
-
+        destroyEffect = Resources.Load<GameObject>("Prefabs/Explosions/Explosion9Object");
         mechaHead = transform.Find("Head").gameObject;
         cameraTarget = transform.Find("CameraTarget").gameObject;
     }
@@ -39,7 +39,11 @@ public class MechaBase : MonoBehaviour, IDamagable
     // Update is called once per frame
     protected virtual void Update()
     {
-
+        if (data.HP <= 0)
+        {
+            Instantiate(destroyEffect, this.transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
     }
 
     

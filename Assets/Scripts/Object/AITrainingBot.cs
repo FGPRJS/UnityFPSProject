@@ -24,6 +24,15 @@ public class AITrainingBot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #region DestroyCheck
+        if(main == null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        #endregion
+
         #region Move
 
         var moveDirection = (targetPos - main.transform.position).normalized;
