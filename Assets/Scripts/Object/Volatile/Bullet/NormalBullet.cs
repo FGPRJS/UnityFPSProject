@@ -20,6 +20,7 @@ public class NormalBullet : BulletBase
         {
             damaging.Damage(100);
         }
+
         var instance = Instantiate(this.afterBulletCollision, this.transform.position, Quaternion.identity);
 
         base.OnTriggerEnter(other);

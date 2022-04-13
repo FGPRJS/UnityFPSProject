@@ -16,6 +16,8 @@ public class TrainingBot : MechaBase
     // Update is called once per frame
     protected override void Update()
     {
+        base.Update();
+
         #region Camera Rotate
         var cameraEulers = cameraTarget.transform.rotation.eulerAngles + new Vector3(-lookValue.y, lookValue.x, 0);
 

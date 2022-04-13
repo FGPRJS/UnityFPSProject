@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        #region Move
         main.lookValue = lookAction.ReadValue<Vector2>();
 
         var readedMoveAction = moveAction.ReadValue<Vector2>();
@@ -107,5 +108,6 @@ public class Player : MonoBehaviour
         var result = ((moveDirection * main.data.CharSpeed) + main.playerVelocity) * Time.deltaTime;
 
         charactercontroller.Move(result);
+        #endregion
     }
 }

@@ -48,6 +48,8 @@ public class DualGun : MechaBase
     // Update is called once per frame
     protected override void Update()
     {
+        base.Update();
+
         #region Skill Action
 
         if (Skill1Command && Skill1CurrentCooltime == 0)

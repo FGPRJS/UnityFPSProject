@@ -39,7 +39,7 @@ public class MechaBase : MonoBehaviour, IDamagable
     // Update is called once per frame
     protected virtual void Update()
     {
-        
+
     }
 
     
