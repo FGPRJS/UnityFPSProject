@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
 {
     private PlayerInput playerInput;
     private InputAction lookAction;
-    private InputAction moveAction;
+    public Vector2 lookValue;
+    public InputAction moveAction;
     private CharacterController charactercontroller;
 
     private MechaBase main;
@@ -97,7 +98,9 @@ public class Player : MonoBehaviour
     private void Update()
     {
         #region Move
-        main.lookValue = lookAction.ReadValue<Vector2>();
+        lookValue = lookAction.ReadValue<Vector2>();
+
+        main.lookValue = lookValue;
 
         var readedMoveAction = moveAction.ReadValue<Vector2>();
 
