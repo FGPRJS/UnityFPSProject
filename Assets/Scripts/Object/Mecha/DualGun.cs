@@ -27,6 +27,9 @@ public class DualGun : MechaBase
         data.HP = 1000;
         data.CharSpeed = 5.0f;
         data.JumpHeight = 10.0f;
+        data.TotalAmmo = 3600;
+        data.MaxAmmo = 36;
+        data.Ammo = data.MaxAmmo;
         #endregion
 
         this.audioSource = GetComponent<AudioSource>();
@@ -38,8 +41,22 @@ public class DualGun : MechaBase
 
     private void Skill1()
     {
+        if(ammoStatus == AmmoStatus.Reloading)
+        {
+            return;
+        }
+
+        if(data.Ammo <= 0)
+        {
+            CurrentReloadCoolTime = ReloadCoolTime;
+            ammoStatus = AmmoStatus.Reloading;
+            return;
+        }
+
         foreach (Transform skill1Muzzle in muzzle.transform)
         {
+            data.Ammo -= 1;
+
             var currentMuzzlePosition = skill1Muzzle.transform.position;
             var shot = Instantiate(this.bullet, currentMuzzlePosition, this.mechaHead.transform.rotation * Quaternion.Euler(90, 0, 0));
             var bulletBase = shot.GetComponent<BulletBase>();

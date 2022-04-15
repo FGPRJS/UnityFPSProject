@@ -18,6 +18,16 @@ public class MechaBase : MonoBehaviour, IDamagable
     public Vector3 playerVelocity = new Vector3(0,0,0);
 
     public Vector2 lookValue;
+    
+    public float ReloadCoolTime = 2.0f;
+    public float CurrentReloadCoolTime;
+    public enum AmmoStatus
+    {
+        Normal,
+        Reloading
+    }
+    public AmmoStatus ammoStatus = AmmoStatus.Normal;
+
 
     public void Damage(long damage)
     {
@@ -34,6 +44,25 @@ public class MechaBase : MonoBehaviour, IDamagable
     protected virtual void Start()
     {
         
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        //Temp Reloading
+        if (ammoStatus == AmmoStatus.Reloading)
+        {
+            if (CurrentReloadCoolTime > 0)
+            {
+                CurrentReloadCoolTime -= Time.deltaTime;
+            }
+            else
+            {
+                CurrentReloadCoolTime = 0;
+                ammoStatus = AmmoStatus.Normal;
+                data.TotalAmmo -= data.MaxAmmo;
+                data.Ammo = data.MaxAmmo;
+            }
+        }
     }
 
     // Update is called once per frame
