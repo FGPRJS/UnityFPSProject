@@ -7,8 +7,9 @@ public class MechaBase : MonoBehaviour, IDamagable
     public MechaData data;
     public GameObject mechaHead;
     public GameObject cameraTarget;
+    public GameObject zoomCameraTarget;
 
-    private GameObject destroyEffect;
+    public GameObject destroyEffect;
 
     //Temp
     public bool Skill1Command = false;
@@ -26,9 +27,7 @@ public class MechaBase : MonoBehaviour, IDamagable
 
     protected virtual void Awake()
     {
-        destroyEffect = Resources.Load<GameObject>("Prefabs/Explosions/Explosion9Object");
-        mechaHead = transform.Find("Head").gameObject;
-        cameraTarget = transform.Find("CameraTarget").gameObject;
+
     }
 
     // Start is called before the first frame update

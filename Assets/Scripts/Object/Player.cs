@@ -27,10 +27,6 @@ public class Player : MonoBehaviour
     {
         main = GetComponentInChildren<MechaBase>();
         cinemachines = GetComponentsInChildren<CinemachineVirtualCamera>();
-        foreach(var cinemachine in cinemachines)
-        {
-            cinemachine.Follow = main.cameraTarget.transform;
-        }
         charactercontroller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
 
