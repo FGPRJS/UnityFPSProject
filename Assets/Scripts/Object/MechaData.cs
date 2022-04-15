@@ -9,6 +9,11 @@ public class MechaData
     private float charSpeed;
     private float jumpHeight;
 
+
+    public long Ammo;
+    public long MaxAmmo;
+    public long TotalAmmo;
+
     public long MaxHP { get => maxHP; set
         {
             if (value < 0)

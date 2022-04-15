@@ -79,6 +79,9 @@ crashlytics-build.properties
 #Resources
 [Aa]ssets/Resources
 
+#TextMesh Pro
+[Aa]ssets/TextMesh Pro
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db

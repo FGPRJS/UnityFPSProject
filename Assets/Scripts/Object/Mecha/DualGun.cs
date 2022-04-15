@@ -6,11 +6,11 @@ public class DualGun : MechaBase
 {
     public float sensibility = 2.0f;
 
-    private GameObject bullet;
-    private AudioClip fireSoundClip;
-    private AudioSource audioSource;
+    public GameObject bullet;
+    public AudioClip fireSoundClip;
+    public AudioSource audioSource;
 
-    private GameObject muzzle;
+    public GameObject muzzle;
 
     public long LookUpLimit;
     public long LookDownLimit;
@@ -29,10 +29,6 @@ public class DualGun : MechaBase
         data.JumpHeight = 10.0f;
         #endregion
 
-
-
-        this.bullet = Resources.Load<GameObject>("Prefabs/Volatiles/NormalBullet");
-        this.fireSoundClip = Resources.Load<AudioClip>("Sound/SoundFX/FireArm/FireArm01");
         this.audioSource = GetComponent<AudioSource>();
         this.audioSource.clip = this.fireSoundClip;
 
