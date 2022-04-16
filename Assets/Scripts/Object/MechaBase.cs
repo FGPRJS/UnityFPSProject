@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class MechaBase : MonoBehaviour, IDamagable
 {
-    public MechaData data;
+    public long MaxHP;
+    public long HP;
+    public float CharSpeed;
+    public float JumpHeight;
+
+    public long Ammo;
+    public long MaxAmmo;
+    public long TotalAmmo;
+
     public GameObject mechaHead;
     public GameObject cameraTarget;
     public GameObject zoomCameraTarget;
@@ -31,8 +39,8 @@ public class MechaBase : MonoBehaviour, IDamagable
 
     public void Damage(long damage)
     {
-        data.HP -= damage;
-        Debug.Log(data.HP);
+        HP -= damage;
+        Debug.Log(HP);
     }
 
     protected virtual void Awake()
@@ -59,8 +67,8 @@ public class MechaBase : MonoBehaviour, IDamagable
             {
                 CurrentReloadCoolTime = 0;
                 ammoStatus = AmmoStatus.Normal;
-                data.TotalAmmo -= data.MaxAmmo;
-                data.Ammo = data.MaxAmmo;
+                TotalAmmo -= MaxAmmo;
+                Ammo = MaxAmmo;
             }
         }
     }
@@ -68,12 +76,10 @@ public class MechaBase : MonoBehaviour, IDamagable
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (data.HP <= 0)
+        if (HP <= 0)
         {
             Instantiate(destroyEffect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }
-
-    
 }

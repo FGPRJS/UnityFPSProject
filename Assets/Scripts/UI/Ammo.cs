@@ -14,8 +14,8 @@ public class Ammo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LeftAmmo.text = target.data.Ammo.ToString();
-        MaxAmmo.text = target.data.MaxAmmo.ToString();
-        TotalAmmo.text = target.data.TotalAmmo.ToString();
+        LeftAmmo.text = target.Ammo.ToString();
+        MaxAmmo.text = target.MaxAmmo.ToString();
+        TotalAmmo.text = target.TotalAmmo.ToString();
     }
 }

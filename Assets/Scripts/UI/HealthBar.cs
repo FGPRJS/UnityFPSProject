@@ -19,13 +19,13 @@ public class HealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Fill.maxValue = Target.data.MaxHP;
-        FillRed.maxValue = Target.data.MaxHP;
+        Fill.maxValue = Target.MaxHP;
+        FillRed.maxValue = Target.MaxHP;
 
-        Fill.value = Target.data.HP;
-        FillRed.value = Target.data.HP;
+        Fill.value = Target.HP;
+        FillRed.value = Target.HP;
 
-        HPText.text = BuildHPText(Target.data.HP, Target.data.MaxHP);
+        HPText.text = BuildHPText(Target.HP, Target.MaxHP);
 
         //Rotating
         transform.RotateAround(transform.position, Vector3.up, 330);
@@ -46,7 +46,7 @@ public class HealthBar : MonoBehaviour
     void Update()
     {
         //HP Image
-        Fill.value = Target.data.HP;
+        Fill.value = Target.HP;
 
         if(Fill.value != FillRed.value)
         {
@@ -54,6 +54,6 @@ public class HealthBar : MonoBehaviour
             FillRed.value = (int)Mathf.Lerp(FillRed.value, Fill.value, lerp);
         }
          //HP Value Text
-        HPText.text = BuildHPText((int)FillRed.value, Target.data.MaxHP);
+        HPText.text = BuildHPText((int)FillRed.value, Target.MaxHP);
     }
 }

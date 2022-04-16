@@ -9,11 +9,10 @@ public class TrainingBot : MechaBase
         base.Awake();
 
         #region GameData
-        data = new MechaData();
-        data.MaxHP = 1000;
-        data.HP = 1000;
-        data.CharSpeed = 5.0f;
-        data.JumpHeight = 10.0f;
+        MaxHP = 1000;
+        HP = 1000;
+        CharSpeed = 5.0f;
+        JumpHeight = 10.0f;
         #endregion
     }
 
