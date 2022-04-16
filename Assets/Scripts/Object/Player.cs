@@ -7,6 +7,15 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public string LookInputName;
+    public string MoveInputName;
+    public string JumpInputName;
+    public string CameraZoomInputName;
+    public string ReloadInputName;
+    public string Skill1FireInputName;
+    public string Skill2AdvancedInputName;
+    public string Skill3UltimateInputName;
+
     private PlayerInput playerInput;
     private InputAction lookAction;
     public Vector2 lookValue;
@@ -35,11 +44,31 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        lookAction = playerInput.actions["Look"];
-        moveAction = playerInput.actions["Move"];
-        playerInput.actions["Jump"].performed += JumpChar;
-        playerInput.actions["Zoom"].performed += ChangeMode;
-        playerInput.actions["Fire"].performed += Fire;
+        lookAction = playerInput.actions[LookInputName];
+        moveAction = playerInput.actions[MoveInputName];
+        playerInput.actions[JumpInputName].performed += JumpChar;
+        playerInput.actions[CameraZoomInputName].performed += ChangeMode;
+        playerInput.actions[Skill1FireInputName].performed += Fire;
+        playerInput.actions[Skill2AdvancedInputName].performed += Advanced;
+        playerInput.actions[Skill3UltimateInputName].performed += Ultimate;
+    }
+
+    private void Ultimate(InputAction.CallbackContext obj)
+    {
+        var isPressed = obj.ReadValue<bool>();
+        if (isPressed)
+        {
+            main.Skill3Command = !main.Skill3Command;
+        }
+    }
+
+    private void Advanced(InputAction.CallbackContext obj)
+    {
+        var isPressed = obj.ReadValueAsButton();
+        if (isPressed)
+        {
+            main.Skill2Command = !main.Skill2Command;
+        }
     }
 
     private void Fire(InputAction.CallbackContext obj)
@@ -87,13 +116,14 @@ public class Player : MonoBehaviour
     {
         if (charactercontroller.isGrounded)
         {
-            main.playerVelocity.y = main.JumpHeight;
+            main.Velocity.y = main.JumpHeight;
         }
     }
 
     private void Update()
     {
         #region Move
+
         lookValue = lookAction.ReadValue<Vector2>();
 
         main.lookValue = lookValue;
@@ -102,11 +132,20 @@ public class Player : MonoBehaviour
 
         var moveDirection = new Vector3(readedMoveAction.x, 0, readedMoveAction.y);
         moveDirection = Camera.main.transform.TransformDirection(moveDirection);
-        main.playerVelocity += Physics.gravity * (Time.deltaTime);
+        main.Velocity += Physics.gravity * (Time.deltaTime);
 
-        var result = ((moveDirection * main.CharSpeed) + main.playerVelocity) * Time.deltaTime;
-
-        charactercontroller.Move(result);
+        var result = ((moveDirection * main.Speed) + main.Velocity) * Time.deltaTime;
+        
+        //Check Movable
+        if (main.isHold || main.isStun || main.isDown)
+        {
+            //Cannot Move
+        }
+        else
+        {
+            charactercontroller.Move(result);
+        }
+        
         #endregion
     }
 }

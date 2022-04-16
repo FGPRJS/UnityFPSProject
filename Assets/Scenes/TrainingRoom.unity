@@ -709,6 +709,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e82b4c34de9934ca2547695c49a652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LookInputName: Look
+  MoveInputName: Move
+  JumpInputName: Jump
+  CameraZoomInputName: CameraZoom
+  ReloadInputName: Reload
+  Skill1FireInputName: Skill1_Fire
+  Skill2AdvancedInputName: Skill2_Advanced
+  Skill3UltimateInputName: Skill3_Ultimate
   lookValue: {x: 0, y: 0}
   moveAction:
     m_Name: Move
@@ -824,6 +832,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 52c5bf98-884f-435a-82cb-a68c7585804d
     m_ActionName: PlayerMecha/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 45d0f947-1b0e-4c92-8915-e93743773cc9
+    m_ActionName: PlayerMecha/Skill2_Advanced[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: de488a22-6e13-40f4-9de0-3f9c790964ac
+    m_ActionName: PlayerMecha/Skill3_Ultimate[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 456b8e50-4265-4f6a-bfb0-f0ddbb8815ea
+    m_ActionName: PlayerMecha/Reload[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: PlayerMecha
@@ -2101,6 +2121,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 846167996}
     m_Modifications:
+    - target: {fileID: 2956380736269588717, guid: 14d20dc448784df4db6d5209dc314dc4,
+        type: 3}
+      propertyPath: hp
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956380736269588717, guid: 14d20dc448784df4db6d5209dc314dc4,
+        type: 3}
+      propertyPath: ammo
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956380736269588717, guid: 14d20dc448784df4db6d5209dc314dc4,
+        type: 3}
+      propertyPath: maxHP
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956380736269588717, guid: 14d20dc448784df4db6d5209dc314dc4,
+        type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956380736269588717, guid: 14d20dc448784df4db6d5209dc314dc4,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956380736269588717, guid: 14d20dc448784df4db6d5209dc314dc4,
+        type: 3}
+      propertyPath: charSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956380736269588717, guid: 14d20dc448784df4db6d5209dc314dc4,
+        type: 3}
+      propertyPath: totalAmmo
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956380736269588717, guid: 14d20dc448784df4db6d5209dc314dc4,
+        type: 3}
+      propertyPath: jumpHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2956380736269588718, guid: 14d20dc448784df4db6d5209dc314dc4,
         type: 3}
       propertyPath: m_RootOrder

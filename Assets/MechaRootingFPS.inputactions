@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Fire",
+                    "name": "Skill1_Fire",
                     "type": "PassThrough",
                     "id": "62fa7fdc-5799-425d-9475-0d07ce22996e",
                     "expectedControlType": "Button",
@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Zoom",
+                    "name": "CameraZoom",
                     "type": "PassThrough",
                     "id": "80e1f958-67f6-446e-800b-f5cd406a3543",
                     "expectedControlType": "Button",
@@ -45,6 +45,33 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "52c5bf98-884f-435a-82cb-a68c7585804d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skill2_Advanced",
+                    "type": "Button",
+                    "id": "45d0f947-1b0e-4c92-8915-e93743773cc9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skill3_Ultimate",
+                    "type": "Button",
+                    "id": "de488a22-6e13-40f4-9de0-3f9c790964ac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "456b8e50-4265-4f6a-bfb0-f0ddbb8815ea",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -92,7 +119,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Fire",
+                    "action": "Skill1_Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -103,7 +130,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Fire",
+                    "action": "Skill1_Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -114,7 +141,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Touch",
-                    "action": "Fire",
+                    "action": "Skill1_Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -125,7 +152,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Joystick",
-                    "action": "Fire",
+                    "action": "Skill1_Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -136,7 +163,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "XR",
-                    "action": "Fire",
+                    "action": "Skill1_Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -147,7 +174,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Zoom",
+                    "action": "CameraZoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -158,7 +185,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Zoom",
+                    "action": "CameraZoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -302,6 +329,39 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "230b076d-439d-46bc-b1f4-71b558de193d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skill2_Advanced",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "baab0e7e-a30f-4205-89b9-330c3b1a67fb",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skill3_Ultimate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cbf122a0-fc26-4c4b-89dc-ea60e7c95ee4",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

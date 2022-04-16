@@ -4,31 +4,30 @@ using UnityEngine;
 
 public class DualGun : MechaBase
 {
-    public float sensibility = 2.0f;
-
     public GameObject bullet;
     public AudioClip fireSoundClip;
     public AudioSource audioSource;
 
     public GameObject muzzle;
 
-    public long LookUpLimit;
-    public long LookDownLimit;
-    
+    public enum DualGunMode
+    {
+        Normal,
+        MachineGun
+    }
+    public DualGunMode mode = DualGunMode.Normal;
 
     // Awake is called before Script Instance Load
     protected override void Awake()
     {
         base.Awake();
 
-        this.audioSource = GetComponent<AudioSource>();
-        this.audioSource.clip = this.fireSoundClip;
-
-        this.muzzle = this.mechaHead.transform.Find("Muzzle").gameObject;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = this.fireSoundClip;
     }
     // Start is called before the first frame update
 
-    private void Skill1()
+    private void Skill1_Fire()
     {
         if(ammoStatus == AmmoStatus.Reloading)
         {
@@ -37,7 +36,7 @@ public class DualGun : MechaBase
 
         if(Ammo <= 0)
         {
-            CurrentReloadCoolTime = ReloadCoolTime;
+            CurrentReloadCoolTime = ReloadCoolTime * ReloadCoolTimeMultiplier;
             ammoStatus = AmmoStatus.Reloading;
             return;
         }
@@ -57,6 +56,52 @@ public class DualGun : MechaBase
         }
     }
 
+    private void Skill2_Advanced()
+    {
+        switch (mode)
+        {
+            case DualGunMode.Normal:
+                mode = DualGunMode.MachineGun;
+                break;
+            case DualGunMode.MachineGun:
+                mode = DualGunMode.Normal;
+                break;
+        }
+
+        Skill1CurrentCooltime = Skill1Cooltime;
+    }
+
+    private void Skill3_Ultimate()
+    {
+
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        switch (mode)
+        {
+            case DualGunMode.Normal:
+                isHold = false;
+                break;
+            case DualGunMode.MachineGun:
+                isHold = true;
+                break;
+        }
+
+        Skill1CurrentCooltime -= Time.deltaTime;
+        if (Skill1CurrentCooltime < 0) Skill1CurrentCooltime = 0;
+
+        Skill2CurrentCooltime -= Time.deltaTime;
+        if (Skill2CurrentCooltime < 0) Skill2CurrentCooltime = 0;
+
+        Skill3CurrentCooltime -= Time.deltaTime;
+        if (Skill3CurrentCooltime < 0) Skill3CurrentCooltime = 0;
+
+        
+    }
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -64,30 +109,28 @@ public class DualGun : MechaBase
 
         #region Skill Action
 
+        //Skill1
         if (Skill1Command && Skill1CurrentCooltime == 0)
         {
-            Skill1();
+            Skill1_Fire();
             Skill1CurrentCooltime = Skill1Cooltime;
         }
 
-        Skill1CurrentCooltime -= Time.deltaTime;
-        if (Skill1CurrentCooltime < 0) Skill1CurrentCooltime = 0;
-
-        #endregion
-
-        #region Head Rotate
-        var rotateVector = mechaHead.transform.eulerAngles + (new Vector3(-lookValue.y, lookValue.x, 0) * sensibility);
-
-        if (rotateVector.x > LookDownLimit && rotateVector.x < 180)
+        //Skill2
+        if (Skill2Command && Skill2CurrentCooltime == 0)
         {
-            rotateVector.x = LookDownLimit;
-        }
-        else if (rotateVector.x > 180 && rotateVector.x < LookUpLimit)
-        {
-            rotateVector.x = LookUpLimit;
+            this.Skill2_Advanced();
+            Skill2CurrentCooltime = Skill2Cooltime;
         }
 
-        mechaHead.transform.eulerAngles = rotateVector;
+        //Skill3
+        if (Skill3Command && Skill3CurrentCooltime == 0)
+        {
+            this.Skill3_Ultimate();
+            Skill3CurrentCooltime = Skill3Cooltime;
+        }
+
+
         #endregion
     }
 }

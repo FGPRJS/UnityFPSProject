@@ -38,9 +38,9 @@ public class AITrainingBot : MonoBehaviour
         var moveDirection = (targetPos - main.transform.position).normalized;
         
         moveDirection = Camera.main.transform.TransformDirection(moveDirection);
-        main.playerVelocity += Physics.gravity * (Time.deltaTime);
+        main.Velocity += Physics.gravity * (Time.deltaTime);
 
-        var result = ((moveDirection * main.CharSpeed) + main.playerVelocity) * Time.deltaTime;
+        var result = ((moveDirection * main.Speed) + main.Velocity) * Time.deltaTime;
 
         controller.Move(result);
         #endregion
