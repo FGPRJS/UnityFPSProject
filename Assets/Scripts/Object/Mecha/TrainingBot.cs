@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrainingBot : MechaBase
+public class TrainingBot : AMecha
 {
     protected override void Awake()
     {
         base.Awake();
     }
-
 
     // Update is called once per frame
     protected override void Update()

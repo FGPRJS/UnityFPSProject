@@ -8,7 +8,7 @@ public class Ammo : MonoBehaviour
     public TextMeshProUGUI LeftAmmo;
     public TextMeshProUGUI MaxAmmo;
     public TextMeshProUGUI TotalAmmo;
-    public MechaBase target;
+    public AMecha target;
 
     
     // Update is called once per frame

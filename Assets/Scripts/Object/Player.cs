@@ -12,17 +12,20 @@ public class Player : MonoBehaviour
     public string JumpInputName;
     public string CameraZoomInputName;
     public string ReloadInputName;
+    public ASkill Reload;
     public string Skill1FireInputName;
     public string Skill2AdvancedInputName;
     public string Skill3UltimateInputName;
+    public string Skill4SpecialInputName;
 
     private PlayerInput playerInput;
     private InputAction lookAction;
     public Vector2 lookValue;
     public InputAction moveAction;
     private CharacterController charactercontroller;
+    private InputAction fireAction;
 
-    private MechaBase main;
+    private AMecha Target;
 
     private CinemachineVirtualCamera[] cinemachines;
     private enum CameraMode
@@ -34,7 +37,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        main = GetComponentInChildren<MechaBase>();
+        Target = GetComponentInChildren<AMecha>();
         cinemachines = GetComponentsInChildren<CinemachineVirtualCamera>();
         charactercontroller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
@@ -46,19 +49,22 @@ public class Player : MonoBehaviour
     {
         lookAction = playerInput.actions[LookInputName];
         moveAction = playerInput.actions[MoveInputName];
+        fireAction = playerInput.actions[Skill1FireInputName];
         playerInput.actions[JumpInputName].performed += JumpChar;
-        playerInput.actions[CameraZoomInputName].performed += ChangeMode;
-        playerInput.actions[Skill1FireInputName].performed += Fire;
+        playerInput.actions[CameraZoomInputName].performed += ChangeCamera;
+        
         playerInput.actions[Skill2AdvancedInputName].performed += Advanced;
         playerInput.actions[Skill3UltimateInputName].performed += Ultimate;
     }
+
+    
 
     private void Ultimate(InputAction.CallbackContext obj)
     {
         var isPressed = obj.ReadValue<bool>();
         if (isPressed)
         {
-            main.Skill3Command = !main.Skill3Command;
+            Target.Ultimate();
         }
     }
 
@@ -67,25 +73,12 @@ public class Player : MonoBehaviour
         var isPressed = obj.ReadValueAsButton();
         if (isPressed)
         {
-            main.Skill2Command = !main.Skill2Command;
-        }
-    }
-
-    private void Fire(InputAction.CallbackContext obj)
-    {
-        var isPressed = obj.ReadValueAsButton();
-        if (isPressed)
-        {
-            main.Skill1Command = true;
-        }
-        else
-        {
-            main.Skill1Command = false;
+            Target.Advance();
         }
     }
 
 
-    private void ChangeMode(InputAction.CallbackContext obj)
+    private void ChangeCamera(InputAction.CallbackContext obj)
     {
         var isPressed = obj.ReadValueAsButton();
         if (isPressed)
@@ -116,7 +109,7 @@ public class Player : MonoBehaviour
     {
         if (charactercontroller.isGrounded)
         {
-            main.Velocity.y = main.JumpHeight;
+            Target.Velocity.y = Target.JumpHeight;
         }
     }
 
@@ -126,18 +119,18 @@ public class Player : MonoBehaviour
 
         lookValue = lookAction.ReadValue<Vector2>();
 
-        main.lookValue = lookValue;
+        Target.lookValue = lookValue;
 
         var readedMoveAction = moveAction.ReadValue<Vector2>();
 
         var moveDirection = new Vector3(readedMoveAction.x, 0, readedMoveAction.y);
         moveDirection = Camera.main.transform.TransformDirection(moveDirection);
-        main.Velocity += Physics.gravity * (Time.deltaTime);
+        Target.Velocity += Physics.gravity * (Time.deltaTime);
 
-        var result = ((moveDirection * main.Speed) + main.Velocity) * Time.deltaTime;
+        var result = ((moveDirection * Target.Speed) + Target.Velocity) * Time.deltaTime;
         
         //Check Movable
-        if (main.isHold || main.isStun || main.isDown)
+        if (Target.isHold || Target.isStun || Target.isDown)
         {
             //Cannot Move
         }
@@ -145,7 +138,19 @@ public class Player : MonoBehaviour
         {
             charactercontroller.Move(result);
         }
-        
+
+        #endregion
+
+
+        #region Fire
+
+        var fire = fireAction.ReadValue<float>();
+
+        if(fire > 0)
+        {
+            Target.Fire();
+        }
+
         #endregion
     }
 }

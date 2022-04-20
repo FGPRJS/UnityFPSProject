@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public MechaBase Target;
+    public AMecha Target;
 
     public TextMeshProUGUI HPText;
 

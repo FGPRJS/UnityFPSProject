@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletBase : MonoBehaviour
+public class ABullet : MonoBehaviour
 {
-    private BulletData data;
-    public BulletData Data { get => data; set => data = value; }
+    public long Damage;
+
     private GameObject prefab;
 
     protected virtual void Awake()

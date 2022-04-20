@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalBullet : BulletBase
+public class NormalBullet : ABullet
 {
-    private GameObject afterBulletCollision;
+    public GameObject afterBulletCollision;
     private float timeLimit = 10.0f;
 
     protected override void Awake()
     {
         base.Awake();
-        afterBulletCollision = Resources.Load<GameObject>("Prefabs/AfterEffects/AfterBulletCollision");
     }
 
     protected override void OnTriggerEnter(Collider other)
@@ -18,7 +17,7 @@ public class NormalBullet : BulletBase
         var damaging = other.gameObject.GetComponentInParent<IDamagable>();
         if(damaging != null)
         {
-            damaging.Damage(100);
+            damaging.Damage(Damage);
         }
 
         var instance = Instantiate(this.afterBulletCollision, this.transform.position, Quaternion.identity);

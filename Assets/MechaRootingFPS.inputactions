@@ -52,7 +52,7 @@
                 },
                 {
                     "name": "Skill2_Advanced",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "45d0f947-1b0e-4c92-8915-e93743773cc9",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -61,7 +61,7 @@
                 },
                 {
                     "name": "Skill3_Ultimate",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "de488a22-6e13-40f4-9de0-3f9c790964ac",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -72,6 +72,15 @@
                     "name": "Reload",
                     "type": "Button",
                     "id": "456b8e50-4265-4f6a-bfb0-f0ddbb8815ea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skill4_Special",
+                    "type": "PassThrough",
+                    "id": "a57b2887-1c74-4fca-9b1b-fa1b8dbb190d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -362,6 +371,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b221209-d871-42e6-9fd4-475faad322d9",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skill4_Special",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

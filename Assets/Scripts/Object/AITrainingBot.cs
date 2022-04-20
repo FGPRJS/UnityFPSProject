@@ -5,13 +5,13 @@ using UnityEngine;
 public class AITrainingBot : MonoBehaviour
 {
     public CharacterController controller;
-    private MechaBase main;
+    private AMecha main;
     private Vector3 targetPos;
 
     private void Awake()
     {
         targetPos = new Vector3(0, 0, 0);
-        main = GetComponentInChildren<MechaBase>();
+        main = GetComponentInChildren<AMecha>();
         controller = GetComponent<CharacterController>();
     }
 

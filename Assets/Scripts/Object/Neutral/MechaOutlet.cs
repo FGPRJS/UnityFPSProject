@@ -41,7 +41,7 @@ public class MechaOutlet : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        var items = other.GetComponentsInParent<MechaBase>();
+        var items = other.GetComponentsInParent<AMecha>();
         if (items.Length <= 0)
         {
             isEmpty = true;
