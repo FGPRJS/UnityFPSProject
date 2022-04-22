@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     public InputAction moveAction;
     private CharacterController charactercontroller;
     private InputAction fireAction;
+    private InputAction reloadAction;
 
     private AMecha Target;
 
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour
         lookAction = playerInput.actions[LookInputName];
         moveAction = playerInput.actions[MoveInputName];
         fireAction = playerInput.actions[Skill1FireInputName];
+        reloadAction = playerInput.actions[ReloadInputName];
         playerInput.actions[JumpInputName].performed += JumpChar;
         playerInput.actions[CameraZoomInputName].performed += ChangeCamera;
         
@@ -149,6 +151,17 @@ public class Player : MonoBehaviour
         if(fire > 0)
         {
             Target.Fire();
+        }
+
+        #endregion
+
+        #region Reload
+
+        var reload = reloadAction.ReadValue<float>();
+
+        if(reload > 0)
+        {
+            Target.Reload();
         }
 
         #endregion

@@ -30,7 +30,7 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Move",
@@ -70,7 +70,7 @@
                 },
                 {
                     "name": "Reload",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "456b8e50-4265-4f6a-bfb0-f0ddbb8815ea",
                     "expectedControlType": "Button",
                     "processors": "",
