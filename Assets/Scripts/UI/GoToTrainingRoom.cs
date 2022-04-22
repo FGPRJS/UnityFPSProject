@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GoToTrainingRoom : ButtonWrapper
 {
+    public LoadingManager manager;
+
     protected override void ButtonAction()
     {
-        SceneManager.LoadScene("TrainingRoom");
+        manager.ChangeScene(LoadingManager.SceneName.TrainingRoom);
     }
 }

@@ -7,36 +7,21 @@ using UnityEngine.UI;
 public abstract class ButtonWrapper : MonoBehaviour
 {
     private Button baseButton;
-    public UnityEvent<ButtonEventType, ButtonEventArgs> ButtonAdditionalEvent;
 
-    public void SubscribeButtonEvent()
+    protected virtual void Start()
     {
-        ButtonAdditionalEvent.AddListener(this.AdditionalEvent);
-    }
-    ~ButtonWrapper()
-    {
-        ButtonAdditionalEvent.RemoveAllListeners();
+        baseButton = GetComponent<Button>();
+        baseButton.onClick.AddListener(ButtonAction);
     }
 
-    void Start()
-    {
-        this.baseButton = this.transform.GetComponent<Button>();
-        this.baseButton.onClick.AddListener(this.ButtonAction);
-        this.AdditionalStartAction();
-    }
 
     protected virtual void ButtonAction()
     {
-        Debug.Log("Button Clicked");
+
     }
 
-    protected virtual void AdditionalEvent(ButtonEventType type, ButtonEventArgs arg)
+    protected virtual void OnDestroy()
     {
-        Debug.Log("Button Additional Event Activated");
-    }
-
-    protected virtual void AdditionalStartAction()
-    {
-
+        baseButton.onClick.RemoveAllListeners();
     }
 }
