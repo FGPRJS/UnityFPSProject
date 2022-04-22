@@ -5,6 +5,7 @@ using UnityEngine;
 public class NormalBullet : ABullet
 {
     public GameObject afterBulletCollision;
+    private float maxTimeLimit = 10.0f;
     private float timeLimit = 10.0f;
 
     protected override void Awake()
@@ -25,13 +26,18 @@ public class NormalBullet : ABullet
         base.OnTriggerEnter(other);
     }
 
+    private void OnEnable()
+    {
+        timeLimit = maxTimeLimit;
+    }
+
     protected override void Update()
     {
         base.Update();
         timeLimit -= Time.deltaTime;
         if(timeLimit <= 0)
         {
-            Destroy(this.gameObject);
+            owner.ReturnBullet(this);
         }
     }
 }
