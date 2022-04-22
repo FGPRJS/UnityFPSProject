@@ -28,11 +28,11 @@ public class ReloadGuage : MonoBehaviour
 
         if(slider.value == 0)
         {
-            transform.localScale = Vector3.zero;
+            Utility.HideObject(gameObject);
         }
         else
         {
-            transform.localScale = Vector3.one;
+            Utility.ShowObject(gameObject);
         }
     }
 }
