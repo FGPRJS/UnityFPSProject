@@ -1,31 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AITrainingBot : MonoBehaviour
 {
     public CharacterController controller;
-    private AMecha main;
+    public AMecha target;
     private Vector3 targetPos;
 
     private void Awake()
     {
         targetPos = new Vector3(0, 0, 0);
-        main = GetComponentInChildren<AMecha>();
-        controller = GetComponent<CharacterController>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        targetPos = main.transform.position;
+        targetPos = target.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
         #region DestroyCheck
-        if(main == null)
+        if(target == null)
         {
             Destroy(this.gameObject);
             return;
@@ -35,12 +34,12 @@ public class AITrainingBot : MonoBehaviour
 
         #region Move
 
-        var moveDirection = (targetPos - main.transform.position).normalized;
+        var moveDirection = (targetPos - target.transform.position).normalized;
         
-        moveDirection = Camera.main.transform.TransformDirection(moveDirection);
-        main.Velocity += Physics.gravity * (Time.deltaTime);
+        moveDirection = transform.TransformDirection(moveDirection);
+        target.Velocity += Physics.gravity * (Time.deltaTime);
 
-        var result = ((moveDirection * main.Speed) + main.Velocity) * Time.deltaTime;
+        var result = ((moveDirection * target.Speed) + target.Velocity) * Time.deltaTime;
 
         controller.Move(result);
         #endregion

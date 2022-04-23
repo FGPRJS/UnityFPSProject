@@ -103,7 +103,7 @@ public class AMecha : MonoBehaviour, IDamagable, IAmmo,
         #endregion
     }
 
-    protected void OnCollisionEnter(Collision other)
+    protected void OnTriggerEnter(Collider other)
     {
         PlayCollisionSound();
     }

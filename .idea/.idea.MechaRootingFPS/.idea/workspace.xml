@@ -23,12 +23,14 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Object/Volatile/AfterEffect/Bullet/AAfterBulletCollision.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Object/ObjectPool/AfterBulletCollisionPool.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Object/Volatile/AfterEffect/Bullet/AfterBulletCollision.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Object/Volatile/Bullet/NormalBullet.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Object/Volatile/Collision/IMetalCollision.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Object/Volatile/Collision/ICollision.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Object/Volatile/SoundEffect/IFire.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Object/Skill/FireNormalBullet.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Object/Terrain/MetalTerrain.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Object/AITrainingBot.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Object/Volatile/Bullet/ABullet.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Object/Volatile/Bullet/NormalBullet.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Object/AMecha.cs" />
     </changedPaths>
   </component>
@@ -76,7 +78,7 @@
       <option name="presentableId" value="Default" />
       <updated>1650674339057</updated>
       <workItem from="1650674367017" duration="321000" />
-      <workItem from="1650674945630" duration="11026000" />
+      <workItem from="1650674945630" duration="15329000" />
     </task>
     <servers />
   </component>
@@ -87,5 +89,24 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Object/AMecha.cs</url>
+          <line>107</line>
+          <properties documentPath="E:\PROJECT\UnityProject\PROJECT\MechaRootingFPS\Assets\Scripts\Object\AMecha.cs" initialLine="107" containingFunctionPresentation="method 'OnTriggerEnter'">
+            <startOffsets>
+              <option value="2453" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2474" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
