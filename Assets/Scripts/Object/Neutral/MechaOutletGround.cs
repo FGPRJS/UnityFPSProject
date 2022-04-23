@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MechaOutlet : MonoBehaviour
+public class MechaOutletGround : MonoBehaviour
 {
-    private GameObject model;
+    public GameObject model;
     private Animator animator;
     public AITrainingBot Producing;
     private AITrainingBot made;
@@ -14,7 +14,6 @@ public class MechaOutlet : MonoBehaviour
 
     private void Awake()
     {
-        model = transform.Find("Model").gameObject;
         animator = model.GetComponent<Animator>();
     }
 

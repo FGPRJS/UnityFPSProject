@@ -2,23 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletObjectPool : MonoBehaviour
+public class BulletPool : AObjectPool<ABullet>
 {
-    public ABullet targetBullet;
-    public long defaultPoolSize;
-    private Queue<ABullet> pool;
-
-    private void Awake()
-    {
-        pool = new Queue<ABullet>();
-    }
-
-    private void Start()
-    {
-        StartCoroutine(CreateBulletPool());
-    }
-
-    public ABullet GetBullet()
+    public override ABullet GetObject()
     {
         ABullet bullet;
 
@@ -28,7 +14,7 @@ public class BulletObjectPool : MonoBehaviour
         }
         else
         {
-            bullet = CreateBullet();
+            bullet = CreateInstance();
         }
 
         bullet.enabled = true;
@@ -36,7 +22,7 @@ public class BulletObjectPool : MonoBehaviour
         return bullet;
     }
 
-    public ABullet GetBullet(Vector3 position, Quaternion rotation)
+    public override ABullet GetObject(Vector3 position, Quaternion rotation)
     {
         ABullet bullet;
 
@@ -46,7 +32,7 @@ public class BulletObjectPool : MonoBehaviour
         }
         else
         {
-            bullet = CreateBullet();
+            bullet = CreateInstance();
         }
 
         bullet.transform.position = position;
@@ -57,7 +43,7 @@ public class BulletObjectPool : MonoBehaviour
         return bullet;
     }
 
-    public void ReturnBullet(ABullet bullet)
+    public override void ReturnObject(ABullet bullet)
     {
         var bulletRigidBody = bullet.GetComponent<Rigidbody>();
 
@@ -68,23 +54,12 @@ public class BulletObjectPool : MonoBehaviour
         pool.Enqueue(bullet);
     }
 
-    private ABullet CreateBullet()
+    protected override ABullet CreateInstance()
     {
-        var newBullet = Instantiate(targetBullet);
+        var newBullet = Instantiate(target);
         newBullet.owner = this;
         newBullet.gameObject.SetActive(false);
 
         return newBullet;
-    }
-
-    IEnumerator CreateBulletPool()
-    {
-        while(pool.Count < defaultPoolSize)
-        {
-            var newBullet = CreateBullet();
-            
-            pool.Enqueue(newBullet);
-            yield return null;
-        }
     }
 }

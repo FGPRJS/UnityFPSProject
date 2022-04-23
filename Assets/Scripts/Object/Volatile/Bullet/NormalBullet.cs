@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class NormalBullet : ABullet
 {
-    public GameObject afterBulletCollision;
     private float maxTimeLimit = 10.0f;
     private float timeLimit = 10.0f;
 
@@ -21,8 +20,6 @@ public class NormalBullet : ABullet
             damaging.Damage(Damage);
         }
 
-        var instance = Instantiate(this.afterBulletCollision, this.transform.position, Quaternion.identity);
-
         base.OnTriggerEnter(other);
     }
 
@@ -37,7 +34,7 @@ public class NormalBullet : ABullet
         timeLimit -= Time.deltaTime;
         if(timeLimit <= 0)
         {
-            owner.ReturnBullet(this);
+            owner.ReturnObject(this);
         }
     }
 }

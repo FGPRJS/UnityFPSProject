@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ABullet : MonoBehaviour
 {
-    public BulletObjectPool owner;
+    public AObjectPool<ABullet> owner;
     public long Damage;
 
     private GameObject prefab;
@@ -21,7 +21,7 @@ public class ABullet : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        owner.ReturnBullet(this);
+        owner.ReturnObject(this);
     }
 
 

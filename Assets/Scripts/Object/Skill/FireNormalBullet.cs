@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireNormalBullet : ASkill
 {
     public GameObject Muzzle;
-    public BulletObjectPool Pool;
+    public BulletPool Pool;
     public float FirePower = 20.0f;
 
     protected override void Action()
@@ -26,7 +26,7 @@ public class FireNormalBullet : ASkill
             var currentMuzzlePosition = muzzle.transform.position;
             var bulletRotation = Target.mechaHead.transform.rotation * Quaternion.Euler(90, 0, 0);
 
-            var shot = Pool.GetBullet(
+            var shot = Pool.GetObject(
                 currentMuzzlePosition, 
                 bulletRotation
                 );
@@ -40,7 +40,7 @@ public class FireNormalBullet : ASkill
                 powerDirection, 
                 ForceMode.Impulse
                 );
-            Target.audioSource.Play();
+            Target.PlayFireSound();
         }
     }
 }

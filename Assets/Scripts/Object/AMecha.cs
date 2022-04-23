@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AMecha : MonoBehaviour, IDamagable, IAmmo
+public class AMecha : MonoBehaviour, IDamagable, IAmmo,
+    IFire, ICollision
 {
     public float sensibility = 2.0f;
 
@@ -38,6 +40,7 @@ public class AMecha : MonoBehaviour, IDamagable, IAmmo
     public AudioClip fireSoundClip;
     public AudioSource audioSource;
     public GameObject destroyEffect;
+    public AudioClip collisionSoundClip;
 
     public Vector2 lookValue;
 
@@ -60,7 +63,6 @@ public class AMecha : MonoBehaviour, IDamagable, IAmmo
     protected virtual void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = this.fireSoundClip;
     }
 
     // Start is called before the first frame update
@@ -101,6 +103,11 @@ public class AMecha : MonoBehaviour, IDamagable, IAmmo
         #endregion
     }
 
+    protected void OnCollisionEnter(Collision other)
+    {
+        PlayCollisionSound();
+    }
+
     public void Reload()
     {
         Skill_Reload.Activate();
@@ -126,7 +133,15 @@ public class AMecha : MonoBehaviour, IDamagable, IAmmo
         Skill_Special.Activate();
     }
 
+    public void PlayFireSound()
+    {
+        audioSource.PlayOneShot(fireSoundClip);
+    }
 
+    public void PlayCollisionSound()
+    {
+        audioSource.PlayOneShot(collisionSoundClip);
+    }
 
     #region Encapsulate
     public long MaxHP { get => maxHP;
