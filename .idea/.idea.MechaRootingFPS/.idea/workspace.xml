@@ -14,9 +14,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3be1a7ff939c43f181c0a10b5a0189ac13c800/bf/96240eb7/UnitySynchronizationContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5A2009C8-5B13-4970-9259-93880E2ECB2E/6f/a17407a0/Queue`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C0B1A99A-69F4-4C7D-8CBE-9502C41E8810/51/a35462ef/PhysicMaterial.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Object/AI/AIDualGun.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Object/Neutral/CreateMecha.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Object/Volatile/SoundEffect/IFire.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Resources/Model/UI/UIUtility.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_Text.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -112,7 +110,7 @@
       <workItem from="1650882982022" duration="374000" />
       <workItem from="1650885054575" duration="6992000" />
       <workItem from="1650922720804" duration="9991000" />
-      <workItem from="1650936587135" duration="8969000" />
+      <workItem from="1650936587135" duration="9613000" />
     </task>
     <servers />
   </component>
