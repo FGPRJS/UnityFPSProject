@@ -4,37 +4,42 @@ using UnityEngine;
 
 public class FireNormalBullet : ASkill
 {
-    public GameObject Muzzle;
-    public BulletPool Pool;
-    public float FirePower = 20.0f;
+    public GameObject muzzle;
+    private BulletPool pool;
+    public float firePower = 20.0f;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        
+        pool = (BulletPool)GameObject.FindObjectOfType(typeof(BulletPool));
+    }
 
     protected override void Action()
     {
         base.Action();
 
-        if(skillOwner.Ammo <= 0)
+        foreach (Transform muzzle in muzzle.transform)
         {
-            skillOwner.Reload();
-            return;
-        }
-
-        foreach (Transform muzzle in Muzzle.transform)
-        {
+            //Ammo Check
+            if(skillOwner.Ammo <= 0)
+            {
+                skillOwner.Reload();
+                return;
+            }
+            
             //Remove Ammo
             skillOwner.Ammo -= 1;
 
             var currentMuzzlePosition = muzzle.transform.position;
             var bulletRotation = skillOwner.mechaHead.transform.rotation * Quaternion.Euler(90, 0, 0);
 
-            var shot = Pool.GetObject(
+            var shot = pool.GetObject(
                 currentMuzzlePosition, 
                 bulletRotation
                 );
-            
-            var bulletBase = shot.GetComponent<ABullet>();
-            bulletBase.Damage = 1;
 
-            var powerDirection = muzzle.transform.forward * FirePower;
+            var powerDirection = muzzle.transform.forward * firePower;
 
             shot.GetComponent<Rigidbody>().AddForce(
                 powerDirection, 

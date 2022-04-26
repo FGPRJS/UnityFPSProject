@@ -8,7 +8,7 @@ public class CreateMecha : ASkill
 
     protected override void Action()
     {
-        Instantiate(instantiateTarget, transform.position, Quaternion.identity);
+        Instantiate(instantiateTarget, transform.position, transform.rotation);
     }
 
 }

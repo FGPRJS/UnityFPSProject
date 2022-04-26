@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BulletPool : AObjectPool<ABullet>
 {
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     public override ABullet GetObject()
     {
         ABullet bullet;

@@ -8,7 +8,7 @@ public class AObjectPool<T> : MonoBehaviour
     protected Queue<T> pool;
     public long defaultPoolSize;
 
-    void Awake()
+    protected virtual void Awake()
     {
         pool = new Queue<T>();
     }

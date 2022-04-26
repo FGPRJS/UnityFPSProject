@@ -30,10 +30,7 @@ public class NormalBullet : ABullet
         }
         
         var damaging = other.gameObject.GetComponentInParent<IDamagable>();
-        if(damaging != null)
-        {
-            damaging.Damage(Damage);
-        }
+        damaging?.Damage(Damage);
 
         base.OnTriggerEnter(other);
     }

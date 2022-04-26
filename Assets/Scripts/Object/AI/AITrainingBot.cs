@@ -8,12 +8,7 @@ public class AITrainingBot : MonoBehaviour
     public CharacterController controller;
     public AMecha target;
     private Vector3 targetPos;
-
-    private void Awake()
-    {
-        targetPos = new Vector3(0, 0, 0);
-    }
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +19,7 @@ public class AITrainingBot : MonoBehaviour
     void Update()
     {
         #region DestroyCheck
-        if(target == null)
+        if(!target)
         {
             Destroy(this.gameObject);
             return;
