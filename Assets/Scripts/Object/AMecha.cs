@@ -23,6 +23,8 @@ public class AMecha : MonoBehaviour, IDamagable, IAmmo,
     [SerializeField]
     private long totalAmmo;
 
+    public bool invincible;
+
 
     //TempStatus
     public bool isHold = false;
@@ -56,8 +58,11 @@ public class AMecha : MonoBehaviour, IDamagable, IAmmo,
 
     public void Damage(long damage)
     {
-        HP -= damage;
-        Debug.Log(HP);
+        if (!invincible)
+        {
+            HP -= damage;
+            Debug.Log(HP);
+        }
     }
 
     protected virtual void Awake()
@@ -79,14 +84,6 @@ public class AMecha : MonoBehaviour, IDamagable, IAmmo,
     // Update is called once per frame
     protected virtual void Update()
     {
-        #region HP Check
-        if (HP <= 0)
-        {
-            Instantiate(destroyEffect, this.transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
-        }
-        #endregion
-
         #region Head Rotate
         var rotateVector = mechaHead.transform.eulerAngles + (new Vector3(-lookValue.y, lookValue.x, 0) * sensibility);
 
@@ -101,11 +98,6 @@ public class AMecha : MonoBehaviour, IDamagable, IAmmo,
 
         mechaHead.transform.eulerAngles = rotateVector;
         #endregion
-    }
-
-    protected void OnTriggerEnter(Collider other)
-    {
-        PlayCollisionSound();
     }
 
     public void Reload()
@@ -166,6 +158,9 @@ public class AMecha : MonoBehaviour, IDamagable, IAmmo,
             else if(value < 0)
             {
                 hp = 0;
+                //Temp : Destroy action
+                Instantiate(destroyEffect, this.transform.position, Quaternion.identity);
+                Destroy(this.gameObject);
             }
             else
             {

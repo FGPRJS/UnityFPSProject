@@ -7,19 +7,19 @@ public class Reload : ASkill
     // Start is called before the first frame update
     protected override void Action()
     {
-        long reloadAmount = Target.MaxAmmo - Target.Ammo;
+        long reloadAmount = skillOwner.MaxAmmo - skillOwner.Ammo;
         
-        if(Target.TotalAmmo < reloadAmount)
+        if(skillOwner.TotalAmmo < reloadAmount)
         {
-            reloadAmount = Target.TotalAmmo;
-            Target.TotalAmmo = 0;
+            reloadAmount = skillOwner.TotalAmmo;
+            skillOwner.TotalAmmo = 0;
         }
         else
         {
-            reloadAmount = Target.MaxAmmo;
-            Target.TotalAmmo -= Target.MaxAmmo;
+            reloadAmount = skillOwner.MaxAmmo;
+            skillOwner.TotalAmmo -= skillOwner.MaxAmmo;
         }
 
-        Target.Ammo = reloadAmount;
+        skillOwner.Ammo = reloadAmount;
     }
 }

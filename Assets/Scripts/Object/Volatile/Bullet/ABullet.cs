@@ -29,9 +29,4 @@ public class ABullet : MonoBehaviour
     {
         
     }
-
-    public void SetGameObject(GameObject prefab)
-    {
-        this.prefab = prefab;
-    }
 }

@@ -12,19 +12,19 @@ public class FireNormalBullet : ASkill
     {
         base.Action();
 
-        if(Target.Ammo <= 0)
+        if(skillOwner.Ammo <= 0)
         {
-            Target.Reload();
+            skillOwner.Reload();
             return;
         }
 
         foreach (Transform muzzle in Muzzle.transform)
         {
             //Remove Ammo
-            Target.Ammo -= 1;
+            skillOwner.Ammo -= 1;
 
             var currentMuzzlePosition = muzzle.transform.position;
-            var bulletRotation = Target.mechaHead.transform.rotation * Quaternion.Euler(90, 0, 0);
+            var bulletRotation = skillOwner.mechaHead.transform.rotation * Quaternion.Euler(90, 0, 0);
 
             var shot = Pool.GetObject(
                 currentMuzzlePosition, 
@@ -40,7 +40,7 @@ public class FireNormalBullet : ASkill
                 powerDirection, 
                 ForceMode.Impulse
                 );
-            Target.PlayFireSound();
+            skillOwner.PlayFireSound();
         }
     }
 }

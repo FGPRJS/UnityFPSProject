@@ -25,7 +25,7 @@ public class ChangeMechaMode : ASkill
                 Animation.Play("ToSpecial");
 
                 //Change Target Status
-                Target.isHold = true;
+                skillOwner.isHold = true;
 
                 //Change Cooltime
                 FireSkill.Cooltime = 0.1f;
@@ -42,7 +42,7 @@ public class ChangeMechaMode : ASkill
                 Animation.Play("ToNormal");
 
                 //Change Target Status
-                Target.isHold = false;
+                skillOwner.isHold = false;
 
                 //Change Cooltime
                 FireSkill.Cooltime = 0.5f;

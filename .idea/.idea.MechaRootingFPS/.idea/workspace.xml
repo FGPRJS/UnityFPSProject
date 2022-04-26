@@ -11,8 +11,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3be1a7ff939c43f181c0a10b5a0189ac13c800/bf/96240eb7/UnitySynchronizationContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5A2009C8-5B13-4970-9259-93880E2ECB2E/6f/a17407a0/Queue`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C0B1A99A-69F4-4C7D-8CBE-9502C41E8810/51/a35462ef/PhysicMaterial.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Object/Neutral/CreateMecha.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Object/Volatile/SoundEffect/IFire.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_Text.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
@@ -29,10 +33,16 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Object/Skill/FireNormalBullet.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Object/Terrain/MetalTerrain.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Object/AITrainingBot.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Object/Volatile/Bullet/ABullet.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Object/Volatile/Bullet/NormalBullet.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Object/AMecha.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Object/Volatile/Bullet/ABullet.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Object/PhysicMaterial/MaterialMetal.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Object/PhysicMaterial/PhysicMaterialManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Object/Volatile/Bullet/NormalBullet.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Object/Neutral/MechaOutletUnderGround.cs" />
     </changedPaths>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="28AzkGXD9WKPJkHLrpccjkei1L6" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -40,14 +50,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;rider.run.widget.enabled.cache&quot;: &quot;false&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ReSpellerSettingsId&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Build/MechaRootingFPS.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="E:\PROJECT\UnityProject\PROJECT\MechaRootingFPS\Build" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="E:\PROJECT\UnityProject\2020.3.32f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath E:\PROJECT\UnityProject\PROJECT\MechaRootingFPS -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="E:\PROJECT\UnityProject\PROJECT\MechaRootingFPS" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
@@ -58,10 +86,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="26848">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="26848" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -78,35 +106,22 @@
       <option name="presentableId" value="Default" />
       <updated>1650674339057</updated>
       <workItem from="1650674367017" duration="321000" />
-      <workItem from="1650674945630" duration="15329000" />
+      <workItem from="1650674945630" duration="16379000" />
+      <workItem from="1650761610845" duration="6590000" />
+      <workItem from="1650882982022" duration="374000" />
+      <workItem from="1650885054575" duration="6992000" />
+      <workItem from="1650922720804" duration="9991000" />
+      <workItem from="1650936587135" duration="458000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
-  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Object/AMecha.cs</url>
-          <line>107</line>
-          <properties documentPath="E:\PROJECT\UnityProject\PROJECT\MechaRootingFPS\Assets\Scripts\Object\AMecha.cs" initialLine="107" containingFunctionPresentation="method 'OnTriggerEnter'">
-            <startOffsets>
-              <option value="2453" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2474" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

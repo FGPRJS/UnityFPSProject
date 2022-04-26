@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ASkill : MonoBehaviour
 {
-    public AMecha Target;
+    public AMecha skillOwner;
 
     [SerializeField]
     private float casttime;
@@ -18,11 +19,11 @@ public class ASkill : MonoBehaviour
 
     private Queue CastQueue;
 
-    public void Awake()
+    protected virtual void Awake()
     {
         CastQueue = new Queue();
     }
-
+    
     public void Activate() 
     {
         if (CurrentCooltime == 0) 
@@ -40,30 +41,24 @@ public class ASkill : MonoBehaviour
 
     protected virtual void Action()
     {
-
+        
     }
-
-
-    public virtual void FixedUpdate()
+    
+    protected virtual void FixedUpdate()
     {
         CurrentCooltime -= Time.deltaTime;
         if(CurrentCooltime <= 0)
         {
             CurrentCooltime = 0;
         }
-    }
-
-    public virtual void Update()
-    {
+        
         CurrentCasttime -= Time.deltaTime;
-        if((CurrentCasttime <= 0) && (CastQueue.Count > 0))
+        if ((CurrentCasttime <= 0) && (CastQueue.Count > 0))
         {
             CastQueue.Dequeue();
             Action();
         }
     }
-
-
 
 
     #region Encapsulation
