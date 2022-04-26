@@ -127,12 +127,14 @@ public class AMecha : MonoBehaviour, IDamagable, IAmmo,
 
     public void PlayFireSound()
     {
-        audioSource.PlayOneShot(fireSoundClip);
+        audioSource.clip = fireSoundClip;
+        audioSource.Play();
     }
 
     public void PlayCollisionSound()
     {
-        audioSource.PlayOneShot(collisionSoundClip);
+        audioSource.clip = collisionSoundClip;
+        audioSource.Play();
     }
 
     #region Encapsulate
