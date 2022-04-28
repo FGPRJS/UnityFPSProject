@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,7 +46,7 @@ public class AMecha : MonoBehaviour,
 
     private long nearbyMechaInfoSize;
     private Collider[] nearbyMechaInfo;
-    public List<AItem> itemNearbyMechaInfo;
+    public ConcurrentBag<AItem> itemNearbyMechaInfo;
     
     public ASkill skillReload;
     public ASkill skillFire;
@@ -68,7 +69,7 @@ public class AMecha : MonoBehaviour,
     {
         nearbyMechaInfoSize = 50;
         nearbyMechaInfo = new Collider[nearbyMechaInfoSize];
-        itemNearbyMechaInfo = new List<AItem>();
+        itemNearbyMechaInfo = new ConcurrentBag<AItem>();
 
         inventory = new AItem[inventorySize];
     }
@@ -136,7 +137,7 @@ public class AMecha : MonoBehaviour,
         for (var i = 0; i < inventorySize; i++)
         {
             if (inventory[i]) continue;
-            inventory[i].gameObject.SetActive(false);
+            item.gameObject.SetActive(false);
             inventory[i] = item;
             return true;
         }

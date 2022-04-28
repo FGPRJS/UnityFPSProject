@@ -11,14 +11,14 @@ public class NearbyMechaInfo : MonoBehaviour
     private AMecha targetMecha;
 
     public ItemInfo itemInfo;
-    public ItemInfo[] ItemInfos;
+    private ItemInfo[] itemInfos;
     private int itemCountLimit = 5;
 
     void Awake()
     {
         targetMecha = player.target;
 
-        ItemInfos = new ItemInfo[itemCountLimit];
+        itemInfos = new ItemInfo[itemCountLimit];
     }
 
     void Start()
@@ -28,10 +28,10 @@ public class NearbyMechaInfo : MonoBehaviour
 
     IEnumerator LoadItemInfo()
     {
-        for (int i = 0; i < ItemInfos.Length; i++)
+        for (int i = 0; i < itemInfos.Length; i++)
         {
-            ItemInfos[i] = Instantiate(itemInfo, transform, false);
-            ItemInfos[i].gameObject.SetActive(false);   
+            itemInfos[i] = Instantiate(itemInfo, transform, false);
+            itemInfos[i].gameObject.SetActive(false);   
         }
         
         yield return null;
@@ -40,26 +40,27 @@ public class NearbyMechaInfo : MonoBehaviour
     private void FixedUpdate()
     {
         #region ItemView
-        //Remove Item Info
-        foreach (var child in transform.GetComponentsInChildren<ItemInfo>())
-        {
-            child.gameObject.SetActive(false);
-        }
-        
         //Append Item Info
-        var itemInfoIndex = 0;
+        var nearbyMechaData = targetMecha.itemNearbyMechaInfo;
+        var itemNearbyMechaInfo = nearbyMechaData.ToArray();
 
-        var itemNearbyMechaInfo = targetMecha.itemNearbyMechaInfo;
+        var infoIndex = 0;
         
-        for (var i = 0; i < itemNearbyMechaInfo.Count; i++)
+        for (var itemInfoIndex = 0; itemInfoIndex < itemCountLimit; itemInfoIndex++)
         {
-            if (itemInfoIndex >= itemCountLimit) break;
-            
-            var item = itemNearbyMechaInfo[i];
-            ItemInfos[itemInfoIndex].target = item;
-            ItemInfos[itemInfoIndex].textGUI.text = item.itemName;
+            if (infoIndex >= itemNearbyMechaInfo.Length)
+            {
+                itemInfos[itemInfoIndex].gameObject.SetActive(false);
+                continue;
+            }
 
-            itemInfoIndex++;
+            var item = itemNearbyMechaInfo[infoIndex];
+            
+            itemInfos[itemInfoIndex].gameObject.SetActive(true);
+            itemInfos[itemInfoIndex].target = item;
+            itemInfos[itemInfoIndex].textGUI.text = item.itemName;
+
+            infoIndex++;
         }
 
         
