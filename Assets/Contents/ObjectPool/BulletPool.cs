@@ -40,8 +40,10 @@ public class BulletPool : AObjectPool<ABullet>
             bullet = CreateInstance();
         }
 
-        bullet.transform.position = position;
-        bullet.transform.rotation = rotation;
+        var bulletTransform = bullet.transform;
+        
+        bulletTransform.position = position;
+        bulletTransform.rotation = rotation;
 
         bullet.gameObject.SetActive(true);
 
@@ -62,7 +64,7 @@ public class BulletPool : AObjectPool<ABullet>
     protected override ABullet CreateInstance()
     {
         var newBullet = Instantiate(target);
-        newBullet.owner = this;
+        newBullet.pool = this;
         newBullet.gameObject.SetActive(false);
 
         return newBullet;

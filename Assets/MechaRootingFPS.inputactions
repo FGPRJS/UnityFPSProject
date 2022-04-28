@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Skill1_Fire",
+                    "name": "SkillFire",
                     "type": "PassThrough",
                     "id": "62fa7fdc-5799-425d-9475-0d07ce22996e",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
+                    "name": "SkillSpecialMove",
                     "type": "Button",
                     "id": "52c5bf98-884f-435a-82cb-a68c7585804d",
                     "expectedControlType": "Button",
@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skill2_Advanced",
+                    "name": "SkillAdvanced",
                     "type": "PassThrough",
                     "id": "45d0f947-1b0e-4c92-8915-e93743773cc9",
                     "expectedControlType": "Button",
@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skill3_Ultimate",
+                    "name": "SkillUltimate",
                     "type": "PassThrough",
                     "id": "de488a22-6e13-40f4-9de0-3f9c790964ac",
                     "expectedControlType": "Button",
@@ -69,7 +69,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Reload",
+                    "name": "SkillReload",
                     "type": "PassThrough",
                     "id": "456b8e50-4265-4f6a-bfb0-f0ddbb8815ea",
                     "expectedControlType": "Button",
@@ -78,9 +78,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skill4_Special",
+                    "name": "SkillSpecial",
                     "type": "PassThrough",
                     "id": "a57b2887-1c74-4fca-9b1b-fa1b8dbb190d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "b6ed8677-9a17-47c9-9bc3-a7dbdff6308c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -128,7 +137,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Skill1_Fire",
+                    "action": "SkillFire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -139,7 +148,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Skill1_Fire",
+                    "action": "SkillFire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -150,7 +159,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Touch",
-                    "action": "Skill1_Fire",
+                    "action": "SkillFire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -161,7 +170,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Joystick",
-                    "action": "Skill1_Fire",
+                    "action": "SkillFire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -172,7 +181,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "XR",
-                    "action": "Skill1_Fire",
+                    "action": "SkillFire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -337,18 +346,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Jump",
+                    "action": "SkillSpecialMove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "230b076d-439d-46bc-b1f4-71b558de193d",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Skill2_Advanced",
+                    "action": "SkillAdvanced",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -359,7 +368,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Skill3_Ultimate",
+                    "action": "SkillUltimate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -370,7 +379,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Reload",
+                    "action": "SkillReload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -381,7 +390,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Skill4_Special",
+                    "action": "SkillSpecial",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f490da8e-ac1f-464e-9774-f4c59ed3069f",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

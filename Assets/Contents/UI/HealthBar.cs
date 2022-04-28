@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -7,11 +8,12 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public AMecha Target;
+    public Player player;
+    private AMecha targetMecha;
 
-    public TextMeshProUGUI HPText;
+    public TextMeshProUGUI hpText;
 
-    public Slider Fill, FillRed;
+    public Slider fill, fillRed;
 
     float lerp = 0f;
     public float duration = 10f;
@@ -19,21 +21,22 @@ public class HealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Fill.maxValue = Target.MaxHP;
-        FillRed.maxValue = Target.MaxHP;
+        if (!targetMecha) return;
+        
+        targetMecha = player.target;
+        
+        fill.maxValue = targetMecha.MaxHP;
+        fillRed.maxValue = targetMecha.MaxHP;
 
-        Fill.value = Target.HP;
-        FillRed.value = Target.HP;
+        fill.value = targetMecha.HP;
+        fillRed.value = targetMecha.HP;
 
-        HPText.text = BuildHPText(Target.HP, Target.MaxHP);
-
-        //Rotating
-        transform.RotateAround(transform.position, Vector3.up, 330);
+        hpText.text = BuildHPText(targetMecha.HP, targetMecha.MaxHP);
     }
 
     string BuildHPText(long HP, long MaxHP)
     {
-        StringBuilder builder = new StringBuilder();
+        var builder = new StringBuilder();
 
         builder.Append(HP);
         builder.Append(" / ");
@@ -45,15 +48,16 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!targetMecha) return;
         //HP Image
-        Fill.value = Target.HP;
+        fill.value = targetMecha.HP;
 
-        if(Fill.value != FillRed.value)
+        if(Math.Abs(fill.value - fillRed.value) > 0.0f)
         {
             lerp += Time.deltaTime / duration;
-            FillRed.value = (int)Mathf.Lerp(FillRed.value, Fill.value, lerp);
+            fillRed.value = (int)Mathf.Lerp(fillRed.value, fill.value, lerp);
         }
          //HP Value Text
-        HPText.text = BuildHPText((int)FillRed.value, Target.MaxHP);
+        hpText.text = BuildHPText((int)fillRed.value, targetMecha.MaxHP);
     }
 }

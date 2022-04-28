@@ -6,22 +6,27 @@ using TMPro;
 
 public class SkillIcon : MonoBehaviour
 {
-    public ASkill target;
+    public Player player;
+    private AMecha targetMecha;
+    private ASkill targetSkill;
     public Slider slider;
     public TextMeshProUGUI cooltimeText;
 
     private void Awake()
     {
+        targetMecha = player.target;
+        targetSkill = targetMecha.skillAdvanced;
+        
         slider.minValue = 0;
-        slider.maxValue = target.Cooltime;
+        slider.maxValue = targetSkill.Cooltime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        cooltimeText.text = target.CurrentCooltime.ToString("0.00");
+        cooltimeText.text = targetSkill.CurrentCooltime.ToString("0.00");
 
-        slider.value = target.CurrentCooltime;
+        slider.value = targetSkill.CurrentCooltime;
         if (slider.value == 0)
         {
             UIUtility.HideObject(cooltimeText.gameObject);

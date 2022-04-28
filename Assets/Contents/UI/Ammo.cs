@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,14 +9,22 @@ public class Ammo : MonoBehaviour
     public TextMeshProUGUI LeftAmmo;
     public TextMeshProUGUI MaxAmmo;
     public TextMeshProUGUI TotalAmmo;
-    public AMecha target;
 
-    
+    public Player player;
+    private AMecha targetMecha;
+
+    private void Awake()
+    {
+        targetMecha = player.target;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        LeftAmmo.text = target.Ammo.ToString();
-        MaxAmmo.text = target.MaxAmmo.ToString();
-        TotalAmmo.text = target.TotalAmmo.ToString();
+        if (!targetMecha) return;
+        
+        LeftAmmo.text = targetMecha.Ammo.ToString();
+        MaxAmmo.text = targetMecha.MaxAmmo.ToString();
+        TotalAmmo.text = targetMecha.TotalAmmo.ToString();
     }
 }

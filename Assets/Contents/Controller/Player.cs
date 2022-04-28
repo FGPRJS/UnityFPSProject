@@ -3,32 +3,39 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IPossessor
 {
-    public string LookInputName;
-    public string MoveInputName;
-    public string JumpInputName;
-    public string CameraZoomInputName;
-    public string ReloadInputName;
-    public ASkill Reload;
-    public string Skill1FireInputName;
-    public string Skill2AdvancedInputName;
-    public string Skill3UltimateInputName;
-    public string Skill4SpecialInputName;
+    public string lookInputName;
+    public string moveInputName;
+    public string cameraZoomInputName;
+
+    public string interactionInputName;
+    
+    public string skillReloadInputName;
+    public string skillFireInputName;
+    public string skillAdvancedInputName;
+    public string skillUltimateInputName;
+    public string skillSpecialInputName;
+    public string skillSpecialMoveInputName;
 
     private PlayerInput playerInput;
     private InputAction lookAction;
-    public Vector2 lookValue;
-    public InputAction moveAction;
-    private CharacterController charactercontroller;
+    private InputAction moveAction;
     private InputAction fireAction;
     private InputAction reloadAction;
+    
+    public AMecha target;
+    public Queue<string> playerMessage;
+    public UnityEvent playerMessageUpdated;
 
-    private AMecha Target;
-
+    public Camera mainCamera;
     private CinemachineVirtualCamera[] cinemachines;
+    
+    
+    
     private enum CameraMode
     {
         DefaultCinemachine,
@@ -38,35 +45,62 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        Target = GetComponentInChildren<AMecha>();
         cinemachines = GetComponentsInChildren<CinemachineVirtualCamera>();
-        charactercontroller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
 
         cameraMode = CameraMode.DefaultCinemachine;
+
+        playerMessage = new Queue<string>();
     }
 
     private void Start()
     {
-        lookAction = playerInput.actions[LookInputName];
-        moveAction = playerInput.actions[MoveInputName];
-        fireAction = playerInput.actions[Skill1FireInputName];
-        reloadAction = playerInput.actions[ReloadInputName];
-        playerInput.actions[JumpInputName].performed += JumpChar;
-        playerInput.actions[CameraZoomInputName].performed += ChangeCamera;
+        //possess if inspector assigned
+        if (target)
+        {
+            target.Possess(this);   
+        }
         
-        playerInput.actions[Skill2AdvancedInputName].performed += Advanced;
-        playerInput.actions[Skill3UltimateInputName].performed += Ultimate;
+        //key input
+        lookAction = playerInput.actions[lookInputName];
+        moveAction = playerInput.actions[moveInputName];
+        fireAction = playerInput.actions[skillFireInputName];
+        reloadAction = playerInput.actions[skillReloadInputName];
+        
+        playerInput.actions[interactionInputName].performed += Interaction;
+        playerInput.actions[skillSpecialMoveInputName].performed += JumpChar;
+        playerInput.actions[cameraZoomInputName].performed += ChangeCamera;
+        playerInput.actions[skillAdvancedInputName].performed += Advanced;
+        playerInput.actions[skillUltimateInputName].performed += Ultimate;
     }
 
-    
+    private void Interaction(InputAction.CallbackContext obj)
+    {
+        //Interaction 1st -> Item
+        if ((target) && (target.itemNearbyMechaInfo.Count > 0))
+        {
+            if (!target.PutItem(target.itemNearbyMechaInfo[0]))
+            {
+                playerMessage.Enqueue("NO EMPTY SPACES IN INVENTORY");
+                playerMessageUpdated.Invoke();
+            }
+            return;
+        }
+        //Interaction 2nd -> other object(Door or something)
+        else
+        {
+            
+        }
+            
+    }
+
 
     private void Ultimate(InputAction.CallbackContext obj)
     {
         var isPressed = obj.ReadValue<bool>();
         if (isPressed)
         {
-            Target.Ultimate();
+            target.Ultimate();
         }
     }
 
@@ -75,7 +109,7 @@ public class Player : MonoBehaviour
         var isPressed = obj.ReadValueAsButton();
         if (isPressed)
         {
-            Target.Advance();
+            target.Advance();
         }
     }
 
@@ -109,48 +143,39 @@ public class Player : MonoBehaviour
 
     private void JumpChar(InputAction.CallbackContext obj)
     {
-        if (charactercontroller.isGrounded)
-        {
-            Target.Velocity.y = Target.JumpHeight;
-        }
+        target.SpecialMove();
     }
 
     private void Update()
     {
-        #region Move
-
-        lookValue = lookAction.ReadValue<Vector2>();
-
-        Target.lookValue = lookValue;
-
-        var readedMoveAction = moveAction.ReadValue<Vector2>();
-
-        var moveDirection = new Vector3(readedMoveAction.x, 0, readedMoveAction.y);
-        moveDirection = Camera.main.transform.TransformDirection(moveDirection);
-        Target.Velocity += Physics.gravity * (Time.deltaTime);
-
-        var result = ((moveDirection * Target.Speed) + Target.Velocity) * Time.deltaTime;
+        if (!target) return;
         
-        //Check Movable
-        if (Target.isHold || Target.isStun || Target.isDown)
-        {
-            //Cannot Move
-        }
-        else
-        {
-            charactercontroller.Move(result);
-        }
+        #region Rotate
+
+        var lookValue = lookAction.ReadValue<Vector2>();
+        
+        target.RotateHead(lookValue);
 
         #endregion
+        
+        #region Move
+        
+        var moveValue = moveAction.ReadValue<Vector2>();
+        
+        var moveDirection = new Vector3(moveValue.x, 0, moveValue.y);
+        moveDirection = mainCamera.transform.TransformDirection(moveDirection);
+        
+        target.Move(moveDirection);
 
-
+        #endregion
+        
         #region Fire
 
         var fire = fireAction.ReadValue<float>();
 
         if(fire > 0)
         {
-            Target.Fire();
+            target.Fire();
         }
 
         #endregion
@@ -161,9 +186,14 @@ public class Player : MonoBehaviour
 
         if(reload > 0)
         {
-            Target.Reload();
+            target.Reload();
         }
 
         #endregion
+    }
+
+    public void Dispossess()
+    {
+        target = null;
     }
 }

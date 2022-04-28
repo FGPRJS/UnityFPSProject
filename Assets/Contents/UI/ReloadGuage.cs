@@ -6,12 +6,17 @@ using UnityEngine.UI;
 public class ReloadGuage : MonoBehaviour
 {
     private Slider slider;
-    public ASkill Target;
+    public Player player;
+    private AMecha targetMecha;
+    private ASkill targetSkill;
 
     private void Awake()
     {
+        targetMecha = player.target;
+        targetSkill = targetMecha.skillReload;
+        
         slider = GetComponent<Slider>();
-        slider.maxValue = Target.Casttime;
+        slider.maxValue = targetSkill.Casttime;
         slider.minValue = 0;
     }
 
@@ -24,7 +29,7 @@ public class ReloadGuage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        slider.value = Target.CurrentCasttime;
+        slider.value = targetSkill.CurrentCasttime;
 
         if(slider.value == 0)
         {

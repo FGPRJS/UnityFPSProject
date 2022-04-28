@@ -10,5 +10,4 @@ public class CreateMecha : ASkill
     {
         Instantiate(instantiateTarget, transform.position, transform.rotation);
     }
-
 }

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Shootable
   - Zoom
+  - Item
+  - Mecha
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - Ground
   - Postprocessing
   - 
-  - MechaBody
-  - MechaHead
+  - Playables
+  - 
   - Bullet
   - 
   - 
@@ -35,10 +37,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - ExistenceCheck
   - Conceptual
+  - 
+  - Null
   m_SortingLayers:
   - name: Fire
     uniqueID: 3804908061
