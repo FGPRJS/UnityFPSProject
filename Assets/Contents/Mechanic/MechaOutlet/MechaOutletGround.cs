@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Contents.Mechanic;
 using UnityEngine;
 
 public class MechaOutletGround : MonoBehaviour

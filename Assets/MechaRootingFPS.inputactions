@@ -2,7 +2,7 @@
     "name": "MechaRootingFPS",
     "maps": [
         {
-            "name": "PlayerMecha",
+            "name": "PlayMode",
             "id": "a80b9e76-9802-4420-9c96-a1b4c5ddb94f",
             "actions": [
                 {
@@ -105,8 +105,8 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PlayerMode",
-                    "type": "PassThrough",
+                    "name": "ChangeInputMode",
+                    "type": "Button",
                     "id": "df145b3e-4f31-4d83-a76d-8a5ce2492c55",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -441,7 +441,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PlayerMode",
+                    "action": "ChangeInputMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

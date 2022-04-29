@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CreateItem : ASkill
 {
-    public GameObject instantiateTarget;
+    public AItem instance;
 
     protected override void Action()
     {
-        Instantiate(instantiateTarget, transform.position, transform.rotation);
+        var item = Instantiate<AItem>(instance, transform.position, transform.rotation);
     }
 }

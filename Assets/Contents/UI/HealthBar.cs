@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Contents.Controller.Player;
+using Contents.Mechanic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

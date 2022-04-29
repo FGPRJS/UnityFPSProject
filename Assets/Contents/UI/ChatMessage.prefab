@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1510839461603141951}
   - component: {fileID: 5053929998544435915}
   - component: {fileID: 2491136686203009122}
+  - component: {fileID: 4540739692358698382}
   m_Layer: 31
-  m_Name: Message
+  m_Name: ChatMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,3 +136,16 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4540739692358698382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8322376149813402072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66151aa3d553bb14495c4f5c78af53a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textGUI: {fileID: 2491136686203009122}

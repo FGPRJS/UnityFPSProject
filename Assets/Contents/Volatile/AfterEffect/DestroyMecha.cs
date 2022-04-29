@@ -9,7 +9,7 @@ public class DestroyMecha : MonoBehaviour
 
     private void Awake()
     {
-        impactSoundClip = Resources.Load<AudioClip>("Sound/SoundFX/Explosion/Explosion1");
+        impactSoundClip = UnityEngine.Resources.Load<AudioClip>("Sound/SoundFX/Explosion/Explosion1");
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = this.impactSoundClip;
     }
