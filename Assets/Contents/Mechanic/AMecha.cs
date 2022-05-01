@@ -1,4 +1,6 @@
 using System.Collections.Concurrent;
+using Contents.Item;
+using Contents.Skill;
 using Contents.UI.Inventory;
 using UnityEngine;
 using UnityEngine.Events;

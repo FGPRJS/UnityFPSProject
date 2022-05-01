@@ -1,32 +1,38 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Contents.Controller.Player;
 using Contents.Mechanic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-public class Ammo : MonoBehaviour
+namespace Contents.UI
 {
-    public TextMeshProUGUI LeftAmmo;
-    public TextMeshProUGUI MaxAmmo;
-    public TextMeshProUGUI TotalAmmo;
-
-    public Player player;
-    private AMecha targetMecha;
-
-    private void Awake()
+    public class Ammo : MonoBehaviour
     {
-        targetMecha = player.target;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!targetMecha) return;
+        public Player player;
+        private AMecha targetMecha;
         
-        LeftAmmo.text = targetMecha.Ammo.ToString();
-        MaxAmmo.text = targetMecha.MaxAmmo.ToString();
-        TotalAmmo.text = targetMecha.TotalAmmo.ToString();
+        public TextMeshProUGUI LeftAmmo;
+        public TextMeshProUGUI MaxAmmo;
+        public TextMeshProUGUI TotalAmmo;
+
+
+        private void Start()
+        {
+            Initialize();
+        }
+
+        public void Initialize()
+        {
+            targetMecha = player.target;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (!targetMecha) return;
+        
+            LeftAmmo.text = targetMecha.Ammo.ToString();
+            MaxAmmo.text = targetMecha.MaxAmmo.ToString();
+            TotalAmmo.text = targetMecha.TotalAmmo.ToString();
+        }
     }
 }

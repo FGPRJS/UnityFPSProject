@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Contents.Skill;
 using UnityEngine;
 
 public class FireNormalBullet : ASkill

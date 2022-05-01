@@ -1,41 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using Contents.Controller.Player;
-using Contents.Mechanic;
+using Contents.Skill;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-public class SkillIcon : MonoBehaviour
+namespace Contents.UI
 {
-    public Player player;
-    private AMecha targetMecha;
-    private ASkill targetSkill;
-    public Slider slider;
-    public TextMeshProUGUI cooltimeText;
-
-    private void Awake()
+    public class SkillIcon : MonoBehaviour
     {
-        targetMecha = player.target;
-        targetSkill = targetMecha.skillAdvanced;
-        
-        slider.minValue = 0;
-        slider.maxValue = targetSkill.Cooltime;
-    }
+        public Player player;
+        public ASkill targetSkill;
 
-    // Update is called once per frame
-    void Update()
-    {
-        cooltimeText.text = targetSkill.CurrentCooltime.ToString("0.00");
+        public Image image;
+        public Slider slider;
+        public TextMeshProUGUI cooltimeText;
 
-        slider.value = targetSkill.CurrentCooltime;
-        if (slider.value == 0)
+        private void Awake()
         {
-            UIUtility.HideObject(cooltimeText.gameObject);
+            slider.minValue = 0;
+            slider.maxValue = targetSkill.Cooltime;
         }
-        else
+
+        private void Start()
         {
-            UIUtility.ShowObject(cooltimeText.gameObject);
+            image.sprite = targetSkill.skillSprite;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            cooltimeText.text = targetSkill.CurrentCooltime.ToString("0.00");
+
+            slider.value = targetSkill.CurrentCooltime;
+            if (slider.value == 0)
+            {
+                UIUtility.HideObject(cooltimeText.gameObject);
+            }
+            else
+            {
+                UIUtility.ShowObject(cooltimeText.gameObject);
+            }
         }
     }
 }

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5616878252710288027}
   - component: {fileID: 5616878252710288026}
   - component: {fileID: 5616878252710288025}
-  - component: {fileID: -4042160687133879179}
+  - component: {fileID: 1405757313023952890}
   m_Layer: 31
-  m_Name: ItemInfo
+  m_Name: ItemNearbyMechaInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &-4042160687133879179
+--- !u!114 &1405757313023952890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,10 +132,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5616878252710288023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64bf4aeba879868428bccc62f134b535, type: 3}
+  m_Script: {fileID: 11500000, guid: d9c758fb3ea41604182b43a987e4063d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textGUI: {fileID: 5616878252803932642}
+  player: {fileID: 0}
+  instance: {fileID: 0}
 --- !u!1 &5616878252803932640
 GameObject:
   m_ObjectHideFlags: 0

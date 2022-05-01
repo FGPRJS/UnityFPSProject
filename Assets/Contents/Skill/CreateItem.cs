@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Contents.Item;
+using Contents.Skill;
 using UnityEngine;
 
 public class CreateItem : ASkill

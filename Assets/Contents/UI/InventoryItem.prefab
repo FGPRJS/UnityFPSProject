@@ -53,6 +53,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 734189751973216076}
   target: {fileID: 0}
+  itemStackText: {fileID: 0}
+  ClickedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!222 &3813242994668976602
 CanvasRenderer:
   m_ObjectHideFlags: 0
