@@ -5,20 +5,20 @@ using UnityEngine;
 
 namespace Contents.UI
 {
-    public class ItemNearbyMechaInfo : MonoBehaviour
+    public class ItemNearbyMechaList : MonoBehaviour
     {
         public Player player;
         private AMecha targetMecha;
 
-        public InventoryItem instance;
-        private InventoryItem[] inventoryItems;
+        public ItemNearbyMecha instance;
+        private ItemNearbyMecha[] nearbyItems;
         private int itemCountLimit = 5;
 
         void Awake()
         {
             targetMecha = player.target;
 
-            inventoryItems = new InventoryItem[itemCountLimit];
+            nearbyItems = new ItemNearbyMecha[itemCountLimit];
         }
 
         void Start()
@@ -28,16 +28,16 @@ namespace Contents.UI
 
         IEnumerator LoadItemInfo()
         {
-            for (int i = 0; i < inventoryItems.Length; i++)
+            for (int i = 0; i < nearbyItems.Length; i++)
             {
-                inventoryItems[i] = Instantiate(instance, transform, false);
-                inventoryItems[i].gameObject.SetActive(false);   
+                nearbyItems[i] = Instantiate(instance, transform, false);
+                nearbyItems[i].gameObject.SetActive(false);   
             }
         
             yield return null;
         }
     
-        private void FixedUpdate()
+        private void Update()
         {
             #region ItemView
             //Append Item Info
@@ -50,14 +50,14 @@ namespace Contents.UI
             {
                 if (infoIndex >= itemNearbyMechaInfo.Length)
                 {
-                    inventoryItems[itemInfoIndex].gameObject.SetActive(false);
+                    nearbyItems[itemInfoIndex].gameObject.SetActive(false);
                     continue;
                 }
 
                 var item = itemNearbyMechaInfo[infoIndex];
             
-                inventoryItems[itemInfoIndex].gameObject.SetActive(true);
-                inventoryItems[itemInfoIndex].target = item;
+                nearbyItems[itemInfoIndex].gameObject.SetActive(true);
+                nearbyItems[itemInfoIndex].Target = item;
 
                 infoIndex++;
             }

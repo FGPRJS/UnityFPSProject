@@ -13,7 +13,7 @@ namespace Contents.UI
     {
         public Image image;
         public AItem target;
-        public TextMeshProUGUI itemStackText;
+        
 
         public UnityEvent<ItemClickedEventArgs> ClickedEvent;
 
