@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using Contents.Skill;
 using UnityEngine;
 
-public class CreateMecha : ASkill
+namespace Contents.Skill
 {
-    public GameObject instantiateTarget;
-
-    protected override void Action()
+    public class CreateMecha : ASkill
     {
-        Instantiate(instantiateTarget, transform.position, transform.rotation);
+        public GameObject instantiateTarget;
+
+        protected override void Action()
+        {
+            Instantiate(instantiateTarget, transform.position, transform.rotation);
+        }
     }
 }

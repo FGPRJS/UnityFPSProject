@@ -42,8 +42,6 @@ public class MechaOutletUnderGround : AMecha
     {
         if (other.gameObject.CompareTag("Mecha"))
             currentCollider = other;
-        else
-            currentCollider = null;
     }
 
     void OnTriggerExit(Collider other)
