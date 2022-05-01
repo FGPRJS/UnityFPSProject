@@ -55,17 +55,24 @@ namespace Contents.UI
         // Update is called once per frame
         void Update()
         {
-            if (!playerMecha) return;
-            //HP Image
-            fill.value = playerMecha.HP;
+            if (!playerMecha)
+            {
+                fill.value = 0;
+                hpText.text = BuildHPText((int)fillRed.value, (int)fill.maxValue);
+            }
+            else
+            {
+                //HP Image
+                fill.value = playerMecha.HP;
+                //HP Value Text
+                hpText.text = BuildHPText((int)fillRed.value, (int)fill.maxValue);
+            }
 
             if(Math.Abs(fill.value - fillRed.value) > 0.0f)
             {
                 lerp += Time.deltaTime / duration;
                 fillRed.value = (int)Mathf.Lerp(fillRed.value, fill.value, lerp);
             }
-            //HP Value Text
-            hpText.text = BuildHPText((int)fillRed.value, playerMecha.MaxHP);
         }
     }
 }
