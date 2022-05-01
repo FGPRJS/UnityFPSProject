@@ -10,7 +10,7 @@ public class MechaOutletUnderGround : AMecha
     public string openAnimationName;
     public string closeAnimationName;
 
-    private Collider currentCollider = null;
+    public Collider currentCollider = null;
     
     private Queue ActionQueue;
 
@@ -28,7 +28,7 @@ public class MechaOutletUnderGround : AMecha
         base.Start();
     }
 
-    private enum CreationStatus
+    public enum CreationStatus
     {
         Opening,
         Opened,
@@ -36,11 +36,13 @@ public class MechaOutletUnderGround : AMecha
         Closed
     }
 
-    private CreationStatus creationStatus;
+    public CreationStatus creationStatus;
     
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Mecha"))
+        if ((other.gameObject.CompareTag("Mecha")) 
+            //Except itself
+            && (other.gameObject != mechaHead))
             currentCollider = other;
     }
 
@@ -51,51 +53,69 @@ public class MechaOutletUnderGround : AMecha
 
     protected override void Update()
     {
-        switch (creationStatus)
+        //Empty
+        if (!currentCollider)
         {
-            case CreationStatus.Closed:
-
-                if (currentCollider)
-                {
+            switch (creationStatus)
+            {
+                case CreationStatus.Closed:
+                    creationStatus = CreationStatus.Opening;
+                    animator.Play(openAnimationName);
                     break;
-                }
-                animator.Play(openAnimationName);
-                creationStatus = CreationStatus.Opening;
                 
-                break;
-            
-            case CreationStatus.Opening:
-                
-                if (currentCollider)
-                {
+                case CreationStatus.Closing:
+                    if (isAnimationComplete())
+                    {
+                        creationStatus = CreationStatus.Closed;
+                    }
                     break;
-                }
                 
-                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1
-                    && !animator.IsInTransition(0))
-                {
-                    creationStatus = CreationStatus.Opened;
-                }
+                case CreationStatus.Opened:
+                    skillFire.Activate();
+                    break;
                 
-                break;
-            
-            case CreationStatus.Opened:
-                
-                skillFire.Activate();
-                animator.Play(closeAnimationName);
-                creationStatus = CreationStatus.Closing;
-
-                break;
-            
-            case CreationStatus.Closing:
-                
-                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 
-                    && !animator.IsInTransition(0))
-                {
-                    creationStatus = CreationStatus.Closed;
-                }
-
-                break;
+                case CreationStatus.Opening:
+                    if (isAnimationComplete())
+                    {
+                        creationStatus = CreationStatus.Opened;
+                    }
+                    break;
+            }
         }
+        //Not Empty(Something is in)
+        else
+        {
+            switch (creationStatus)
+            {
+                case CreationStatus.Closed:
+                    //Normal. do nothing
+                    break;
+                
+                case CreationStatus.Closing:
+                    if (isAnimationComplete())
+                    {
+                        creationStatus = CreationStatus.Closed;
+                    }
+                    break;
+                
+                case CreationStatus.Opened:
+                    creationStatus = CreationStatus.Closing;
+                    animator.Play(closeAnimationName);
+                    break;
+                
+                case CreationStatus.Opening:
+                    if (isAnimationComplete())
+                    {
+                        creationStatus = CreationStatus.Opened;
+                    }
+                    break;
+            }
+        }
+    }
+
+    private bool isAnimationComplete()
+    {
+        return (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1
+                && !animator.IsInTransition(0));
     }
 }

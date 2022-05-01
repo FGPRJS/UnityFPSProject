@@ -8,7 +8,8 @@ namespace Contents.Skill
 
         protected override void Action()
         {
-            Instantiate(instantiateTarget, transform.position, transform.rotation);
+            var thisTransform = transform;
+            Instantiate(instantiateTarget, thisTransform.position, thisTransform.rotation);
         }
     }
 }
